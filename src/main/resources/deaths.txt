@@ -1,0 +1,422 @@
+^(?<v>\S+) was violently assassinated by (?<k>\S+) with (a|an) (?<w>\S+)$
+^(?<v>\S+) was utterly destroyed by (?<k>\S+) with (a|an) (?<w>\S+)$
+^(?<v>\S+) was turned into red dust by (?<k>\S+) with (a|an) (?<w>\S+)$
+^(?<v>\S+) was turned into bloody rain by (?<k>\S+) with (a|an) (?<w>\S+)$
+^(?<v>\S+) was thrown off a cliff by (?<k>\S+)$
+^(?<v>\S+) was stung to death whilst fighting (?<k>\S+)$
+^(?<v>\S+) was slain by (?<k>\S+) (with|using) (?<w>\S+)$
+^(?<v>\S+) was shot by (?<k>\S+) (with|using) (?<w>\S+)$
+^(?<v>\S+) was removed by (?<k>\S+) (with|using) (a|an) (?<w>\S+)$
+^(?<v>\S+) was reduced to lava by lava whilst fighting (?<k>\S+)$
+^(?<v>\S+) was pushed off of vines by (?<k>\S+)$
+^(?<v>\S+) was pushed off a ladder by (?<k>\S+)$
+^(?<v>\S+) was killed by (?<k>\S+) using magic\.$
+^(?<v>\S+) was impaled by (?<k>\S+) using (?<w>\S+)$
+^(?<v>\S+) was destroyed by (?<k>\S+) with (a|an) (?<w>\S+)$
+^(?<v>\S+) was deleted by (?<k>\S+) (with|using) (a|an) (?<w>\S+)$
+^(?<v>\S+) was blown up by (?<k>\S+) (with|using) (a|an) (?<w>\S+)$
+^(?<v>\S+) was blown apart by (?<k>\S+) with (a|an) (?<w>\S+)$
+^(?<v>\S+) was assassinated by (?<k>\S+) (with|using) (?<w>\S+)$
+^(?<v>\S+) turned into ash whilst fighting (?<k>\S+)$
+^(?<v>\S+) tripped, broke a bone or died somehow inside lava whilst fighting (?<k>\S+)$
+^(?<v>\S+) tried to swim in lava and didn't get out quick enough whilst fighting (?<k>\S+)$
+^(?<v>\S+) suffocated in water whilst fighting (?<k>\S+)$
+^(?<v>\S+) smashed themselves against a cactus and died trying to escape (?<k>\S+)$
+^(?<v>\S+) melted in lava whilst fighting (?<k>\S+)$
+^(?<v>\S+) melted by fire whilst fighting (?<k>\S+)$
+^(?<v>\S+) fell to death after being pushed by (?<k>\S+)$
+^(?<v>\S+) fell into the void whilst fighting (?<k>\S+)$
+^(?<v>\S+) drowned whilst fighting (?<k>\S+)$
+^(?<v>\S+) drowned in lava whilst fighting (?<k>\S+)$
+^(?<v>\S+) died inside lava somehow whilst fighting (?<k>\S+)$
+^(?<v>\S+) couldn't swim up quick enough whilst fighting (?<k>\S+)$
+^(?<v>\S+) combusted whilst fighting (?<k>\S+)$
+^(?<v>\S+) burned up in lava whilst fighting (?<k>\S+)$
+^(?<v>\S+) burned to death whilst fighting (?<k>\S+)$
+^(?<v>\S+) burned apart whilst fighting (?<k>\S+)$
+^(?<v>\S+) became lava whilst fighting (?<k>\S+)$
+^(?<k>\S+) wrecked (?<v>\S+) (with|using) (?<w>\S+)$
+^(?<k>\S+) violently combined (?<w>\S+) and (?<v>\S+)$
+^(?<k>\S+) used (?<w>\S+) to separate (?<v>\S+)$
+^(?<k>\S+) unmade (?<v>\S+) (with|using) (?<w>\S+)$
+^(?<k>\S+) tore (?<v>\S+) apart (with|using) their fists\.$
+^(?<k>\S+) tore (?<v>\S+) apart (with|using) (?<w>\S+)$
+^(?<k>\S+) terminated (?<v>\S+) (with|using) (?<w>\S+)$
+^(?<k>\S+) stabbed (?<v>\S+) (with|using) (?<w>\S+)$
+^(?<k>\S+) smashed (?<v>\S+) (with|using) (?<w>\S+)$
+^(?<k>\S+) slayed (?<v>\S+) (with|using) (?<w>\S+)$
+^(?<k>\S+) slapped (?<v>\S+) to death\.$
+^(?<k>\S+) shoved a fist down (?<v>\S+)'s throat\.$
+^(?<k>\S+) shoved (?<w>\S+) inside (?<v>\S+)$
+^(?<k>\S+) shoved (?<w>\S+) down (?<v>\S+)'s throat\.$
+^(?<k>\S+) separated (?<v>\S+) (with|using) their bare hands\.$
+^(?<k>\S+) separated (?<v>\S+) (with|using) (?<w>\S+)$
+^(?<k>\S+) ruined (?<v>\S+) (with|using) (?<w>\S+)$
+^(?<k>\S+) reduced (?<v>\S+) into a bloody meat pile with just fists\.$
+^(?<k>\S+) ravaged (?<v>\S+) (with|using) (?<w>\S+)$
+^(?<k>\S+) put their fists inside (?<v>\S+) violently\.$
+^(?<k>\S+) put (?<w>\S+) through (?<v>\S+)'s body\.$
+^(?<k>\S+) pummeled (?<v>\S+) to death (with|using) (?<w>\S+)$
+^(?<k>\S+) obliterated (?<v>\S+) (with|using) (?<w>\S+)$
+^(?<k>\S+) murdered (?<v>\S+) (with|using) (?<w>\S+)$
+^(?<k>\S+) mashed (?<v>\S+) (with|using) (?<w>\S+)$
+^(?<k>\S+) liquified (?<v>\S+) (with|using) (?<w>\S+)$
+^(?<k>\S+) killed (?<v>\S+) (with|using) (?<w>\S+)$
+^(?<k>\S+) fisted (?<v>\S+) to death\.$
+^(?<k>\S+) exterminated (?<v>\S+) (with|using) (?<w>\S+)$
+^(?<k>\S+) executed (?<v>\S+) (with|using) (?<w>\S+)$
+^(?<k>\S+) disintegrated (?<v>\S+) (with|using) (?<w>\S+)$
+^(?<k>\S+) did something horrible to (?<v>\S+) (with|using) (?<w>\S+)$
+^(?<k>\S+) destroyed (?<v>\S+) (with|using) (?<w>\S+)$
+^(?<k>\S+) demolished (?<v>\S+) (with|using) (?<w>\S+)$
+^(?<k>\S+) cut (?<v>\S+) (with|using) (?<w>\S+)$
+^(?<k>\S+) crushed (?<v>\S+) (with|using) (?<w>\S+)$
+^(?<k>\S+) crumbled (?<v>\S+) (with|using) (?<w>\S+)$
+^(?<k>\S+) cracked (?<v>\S+) open (with|using) (?<w>\S+)$
+^(?<k>\S+) chopped (?<v>\S+) up (with|using) (?<w>\S+)$
+^(?<k>\S+) butchered (?<v>\S+) (with|using) (?<w>\S+)$
+^(?<k>\S+) broke their fists on (?<v>\S+)$
+^(?<k>\S+) broke (?<v>\S+) (with|using) (?<w>\S+)$
+^(?<k>\S+) assassinated (?<v>\S+) using just their hands\.$
+^(?<k>\S+) assassinated (?<v>\S+) (with|using) (?<w>\S+)$
+^(?<k>\S+) annihilated (?<v>\S+) (with|using) (?<w>\S+)$
+^(?<k>\S+) abused (?<w>\S+) on (?<v>\S+)$
+^(?<v>\S+) got stuck in a berry bush and died trying to escape (?<k>\S+)$
+^(?<v>\S+) became lava whilst fighting (?<m>\S+)$
+^(?<v>\S+) became lava whilst fighting (?<w>\S+)$
+^(?<v>\S+) burned apart whilst fighting (?<m>\S+)$
+^(?<v>\S+) burned apart whilst fighting (?<w>\S+)$
+^(?<v>\S+) burned to death whilst fighting (?<m>\S+)$
+^(?<v>\S+) burned to death whilst fighting (?<w>\S+)$
+^(?<v>\S+) burned up in lava whilst fighting (?<m>\S+)$
+^(?<v>\S+) burned up in lava whilst fighting (?<w>\S+)$
+^(?<v>\S+) combusted whilst fighting (?<m>\S+)$
+^(?<v>\S+) combusted whilst fighting (?<w>\S+)$
+^(?<v>\S+) couldn't outrun (?<m>\S+)\.$
+^(?<v>\S+) couldn't outrun (?<w>\S+)\.$
+^(?<v>\S+) couldn't swim up quick enough whilst fighting (?<m>\S+)$
+^(?<v>\S+) couldn't swim up quick enough whilst fighting (?<w>\S+)$
+^(?<v>\S+) died inside lava somehow whilst fighting (?<m>\S+)$
+^(?<v>\S+) died inside lava somehow whilst fighting (?<w>\S+)$
+^(?<v>\S+) drowned in lava whilst fighting (?<m>\S+)$
+^(?<v>\S+) drowned in lava whilst fighting (?<w>\S+)$
+^(?<v>\S+) drowned whilst fighting (?<m>\S+)$
+^(?<v>\S+) drowned whilst fighting (?<w>\S+)$
+^(?<v>\S+) fell into the void whilst fighting (?<m>\S+)$
+^(?<v>\S+) fell into the void whilst fighting (?<w>\S+)$
+^(?<v>\S+) fell to death after being pushed by (?<m>\S+)$
+^(?<v>\S+) fell to death after being pushed by (?<w>\S+)$
+^(?<v>\S+) fought with (?<m>\S+) and died\.$
+^(?<v>\S+) fought with (?<w>\S+) and died\.$
+^(?<v>\S+) melted by fire whilst fighting (?<m>\S+)$
+^(?<v>\S+) melted by fire whilst fighting (?<w>\S+)$
+^(?<v>\S+) melted in lava whilst fighting (?<m>\S+)$
+^(?<v>\S+) melted in lava whilst fighting (?<w>\S+)$
+^(?<v>\S+) melted inside (?<m>\S+)\.$
+^(?<v>\S+) melted inside (?<w>\S+)\.$
+^(?<v>\S+) merged with (?<m>\S+) and died slowly\.$
+^(?<v>\S+) merged with (?<w>\S+) and died slowly\.$
+^(?<v>\S+) smashed themselves against a cactus and died trying to escape (?<m>\S+)$
+^(?<v>\S+) smashed themselves against a cactus and died trying to escape (?<w>\S+)$
+^(?<v>\S+) suffocated in water whilst fighting (?<m>\S+)$
+^(?<v>\S+) suffocated in water whilst fighting (?<w>\S+)$
+^(?<v>\S+) suffocated inside (?<m>\S+)\.$
+^(?<v>\S+) suffocated inside (?<w>\S+)\.$
+^(?<v>\S+) tamed (?<m>\S+) to kill themselves\.$
+^(?<v>\S+) tamed (?<w>\S+) to kill themselves\.$
+^(?<v>\S+) tried to swim in lava and didn't get out quick enough whilst fighting (?<m>\S+)$
+^(?<v>\S+) tried to swim in lava and didn't get out quick enough whilst fighting (?<w>\S+)$
+^(?<v>\S+) tripped, broke a bone or died somehow inside lava whilst fighting (?<m>\S+)$
+^(?<v>\S+) tripped, broke a bone or died somehow inside lava whilst fighting (?<w>\S+)$
+^(?<v>\S+) turned into ash whilst fighting (?<m>\S+)$
+^(?<v>\S+) turned into ash whilst fighting (?<w>\S+)$
+^(?<v>\S+) was assassinated by (?<m>\S+) wielding (?<w>\S+)$
+^(?<v>\S+) was assassinated by (?<m>\S+)\.$
+^(?<v>\S+) was assassinated by (?<w>\S+)\.$
+^(?<v>\S+) was beaten into meaty pulp by (?<m>\S+) and died painfully\.$
+^(?<v>\S+) was beaten into meaty pulp by (?<m>\S+) named (?<w>\S+)$
+^(?<v>\S+) was beaten into meaty pulp by (?<m>\S+) wielding (?<w>\S+) and died painfully\.$
+^(?<v>\S+) was beaten into meaty pulp by (?<m>\S+)\.$
+^(?<v>\S+) was beaten into meaty pulp by (?<w>\S+) and died painfully\.$
+^(?<v>\S+) was beaten into meaty pulp by (?<w>\S+)\.$
+^(?<v>\S+) was beaten to death by (?<m>\S+) wielding (?<w>\S+)$
+^(?<v>\S+) was beaten to death by (?<m>\S+)\.$
+^(?<v>\S+) was beaten to death by (?<w>\S+)\.$
+^(?<v>\S+) was bitten to death by (?<m>\S+)\.$
+^(?<v>\S+) was bitten to death by (?<w>\S+)\.$
+^(?<v>\S+) was blown to pieces by (?<m>\S+)\.$
+^(?<v>\S+) was blown to pieces by (?<w>\S+)\.$
+^(?<v>\S+) was bombarded to death by (?<m>\S+) wielding (?<w>\S+)\.$
+^(?<v>\S+) was bombarded to death by (?<m>\S+)\.$
+^(?<v>\S+) was bombarded to death by (?<w>\S+)\.$
+^(?<v>\S+) was bombarded apart by (?<m>\S+) wielding (?<w>\S+)$
+^(?<v>\S+) was bombarded apart by (?<m>\S+)\.$
+^(?<v>\S+) was bombarded apart by (?<w>\S+)\.$
+^(?<v>\S+) was bombarded into a fiery death by (?<m>\S+)\.$
+^(?<v>\S+) was bombarded into a fiery death by (?<w>\S+)\.$
+^(?<v>\S+) was brutally ripped apart by (?<m>\S+) wielding (?<w>\S+)$
+^(?<v>\S+) was brutally ripped apart by (?<m>\S+)\.$
+^(?<v>\S+) was brutally ripped apart by (?<w>\S+)\.$
+^(?<v>\S+) was carefully killed by (?<m>\S+) wielding (?<w>\S+)$
+^(?<v>\S+) was carefully killed by (?<m>\S+)\.$
+^(?<v>\S+) was carefully killed by (?<w>\S+)\.$
+^(?<v>\S+) was catapulted off a cliff by (?<m>\S+)\.$
+^(?<v>\S+) was catapulted off a cliff by (?<w>\S+)\.$
+^(?<v>\S+) was consumed by (?<m>\S+) wielding (?<w>\S+)$
+^(?<v>\S+) was consumed by (?<m>\S+)\.$
+^(?<v>\S+) was consumed by (?<w>\S+)\.$
+^(?<v>\S+) was crushed by (?<m>\S+) wielding (?<w>\S+)$
+^(?<v>\S+) was crushed by (?<m>\S+)\.$
+^(?<v>\S+) was crushed by (?<w>\S+)\.$
+^(?<v>\S+) was cursed to slow death by (?<m>\S+)\.$
+^(?<v>\S+) was cursed to slow death by (?<w>\S+)\.$
+^(?<v>\S+) was deconstructed by (?<m>\S+) wielding (?<w>\S+)$
+^(?<v>\S+) was deconstructed by (?<m>\S+)\.$
+^(?<v>\S+) was deconstructed by (?<w>\S+)\.$
+^(?<v>\S+) was demolished by (?<m>\S+) wielding (?<w>\S+)$
+^(?<v>\S+) was demolished by (?<m>\S+)\.$
+^(?<v>\S+) was demolished by (?<w>\S+)\.$
+^(?<v>\S+) was destroyed by (?<m>\S+) named (?<w>\S+)$
+^(?<v>\S+) was destroyed by (?<m>\S+) wielding (?<w>\S+)$
+^(?<v>\S+) was destroyed by (?<m>\S+)\.$
+^(?<v>\S+) was destroyed by (?<w>\S+)\.$
+^(?<v>\S+) was devoured by (?<m>\S+)\.$
+^(?<v>\S+) was devoured by (?<w>\S+)\.$
+^(?<v>\S+) was eaten by (?<m>\S+) wielding (?<w>\S+)$
+^(?<v>\S+) was eaten by (?<m>\S+)\.$
+^(?<v>\S+) was eaten by (?<w>\S+)\.$
+^(?<v>\S+) was exploded by (?<m>\S+)\.$
+^(?<v>\S+) was exploded by (?<w>\S+)\.$
+^(?<v>\S+) was fisted to death by (?<m>\S+)\.$
+^(?<v>\S+) was fisted to death by (?<w>\S+)\.$
+^(?<v>\S+) was gibbed apart by (?<m>\S+) punches\.$
+^(?<v>\S+) was gibbed apart by (?<w>\S+) punches\.$
+^(?<v>\S+) was gored to death by (?<m>\S+) wielding (?<w>\S+)$
+^(?<v>\S+) was gored to death by (?<m>\S+)\.$
+^(?<v>\S+) was gored to death by (?<w>\S+)\.$
+^(?<v>\S+) was impaled by (?<m>\S+)\.$
+^(?<v>\S+) was impaled by (?<w>\S+)\.$
+^(?<v>\S+) was impaled by dripstone trying to escape (?<m>\S+)\.$
+^(?<v>\S+) was impaled by dripstone trying to escape (?<w>\S+)\.$
+^(?<v>\S+) was killed by (?<m>\S+) named (?<w>\S+) wielding (?:\S+)$
+^(?<v>\S+) was killed by (?<m>\S+) named (?<w>\S+)$
+^(?<v>\S+) was killed by (?<m>\S+) wielding (?<w>\S+)$
+^(?<v>\S+) was killed by (?<m>\S+)\.$
+^(?<v>\S+) was killed by (?<w>\S+)\.$
+^(?<v>\S+) was killed to death by (?<m>\S+) wielding (?<w>\S+)$
+^(?<v>\S+) was killed to death by (?<m>\S+)\.$
+^(?<v>\S+) was killed to death by (?<w>\S+)\.$
+^(?<v>\S+) was launched into space by (?<m>\S+)\.$
+^(?<v>\S+) was launched into space by (?<w>\S+)\.$
+^(?<v>\S+) was maimed by (?<m>\S+) wielding (?<w>\S+)$
+^(?<v>\S+) was maimed by (?<m>\S+)\.$
+^(?<v>\S+) was maimed by (?<w>\S+)\.$
+^(?<v>\S+) was mauled to death by (?<m>\S+) wielding (?<w>\S+)$
+^(?<v>\S+) was mauled to death by (?<m>\S+)\.$
+^(?<v>\S+) was mauled to death by (?<w>\S+)\.$
+^(?<v>\S+) was mauled to pieces by (?<m>\S+) wielding (?<w>\S+)$
+^(?<v>\S+) was mauled to pieces by (?<m>\S+)\.$
+^(?<v>\S+) was mauled to pieces by (?<w>\S+)\.$
+^(?<v>\S+) was melted apart by (?<m>\S+) wielding (?<w>\S+)$
+^(?<v>\S+) was melted apart by (?<m>\S+)\.$
+^(?<v>\S+) was melted apart by (?<w>\S+)\.$
+^(?<v>\S+) was messed up by (?<m>\S+) wielding (?<w>\S+)$
+^(?<v>\S+) was messed up by (?<m>\S+)\.$
+^(?<v>\S+) was messed up by (?<w>\S+)\.$
+^(?<v>\S+) was murdered by (?<m>\S+) wielding (?<w>\S+)$
+^(?<v>\S+) was murdered by (?<m>\S+)\.$
+^(?<v>\S+) was murdered by (?<w>\S+)\.$
+^(?<v>\S+) was nibbled to death by (?<m>\S+)\.$
+^(?<v>\S+) was nibbled to death by (?<w>\S+)\.$
+^(?<v>\S+) was obliterated by (?<m>\S+) wielding (?<w>\S+)$
+^(?<v>\S+) was obliterated by (?<m>\S+)\.$
+^(?<v>\S+) was obliterated by (?<w>\S+)\.$
+^(?<v>\S+) was poisoned to death by (?<m>\S+)\.$
+^(?<v>\S+) was poisoned to death by (?<w>\S+)\.$
+^(?<v>\S+) was pummeled into multiple parts by (?<m>\S+) and died slowly\.$
+^(?<v>\S+) was pummeled into multiple parts by (?<m>\S+) named (?<w>\S+)$
+^(?<v>\S+) was pummeled into multiple parts by (?<m>\S+) wielding (?<w>\S+) and died slowly\.$
+^(?<v>\S+) was pummeled into multiple parts by (?<m>\S+) wielding (?<w>\S+)$
+^(?<v>\S+) was pummeled into multiple parts by (?<m>\S+)\.$
+^(?<v>\S+) was pummeled into multiple parts by (?<w>\S+)\.$
+^(?<v>\S+) was raided to death by (?<m>\S+) wielding (?<w>\S+)$
+^(?<v>\S+) was raided to death by (?<m>\S+)\.$
+^(?<v>\S+) was raided to death by (?<w>\S+)\.$
+^(?<v>\S+) was reduced into thick paste by (?<m>\S+) wielding (?<w>\S+)$
+^(?<v>\S+) was reduced into thick paste by (?<m>\S+)\.$
+^(?<v>\S+) was reduced into thick paste by (?<w>\S+)\.$
+^(?<v>\S+) was reduced to dust by (?<m>\S+) wielding (?<w>\S+)$
+^(?<v>\S+) was reduced to dust by (?<m>\S+)\.$
+^(?<v>\S+) was reduced to dust by (?<w>\S+)\.$
+^(?<v>\S+) was reduced to lava by lava whilst fighting (?<m>\S+)$
+^(?<v>\S+) was reduced to lava by lava whilst fighting (?<w>\S+)$
+^(?<v>\S+) was removed by (?<m>\S+) wielding (?<w>\S+)$
+^(?<v>\S+) was removed by (?<m>\S+)\.$
+^(?<v>\S+) was removed by (?<w>\S+)\.$
+^(?<v>\S+) was ripped and smashed apart by (?<m>\S+) wielding (?<w>\S+)$
+^(?<v>\S+) was ripped and smashed apart by (?<m>\S+)\.$
+^(?<v>\S+) was ripped and smashed apart by (?<w>\S+)\.$
+^(?<v>\S+) was ripped apart by (?<m>\S+) and instantly died\.$
+^(?<v>\S+) was ripped apart by (?<m>\S+) wielding (?<w>\S+) and instantly died\.$
+^(?<v>\S+) was ripped apart by (?<m>\S+) wielding (?<w>\S+)$
+^(?<v>\S+) was ripped apart by (?<m>\S+)\.$
+^(?<v>\S+) was ripped apart by (?<w>\S+) and instantly died\.$
+^(?<v>\S+) was ripped apart by (?<w>\S+)\.$
+^(?<v>\S+) was shot by (?<m>\S+) and died instantly\.$
+^(?<v>\S+) was shot by (?<m>\S+) wielding (?<w>\S+) and died instantly\.$
+^(?<v>\S+) was shot by (?<w>\S+) and died instantly\.$
+^(?<v>\S+) was slain by (?<m>\S+) wielding (?<w>\S+)$
+^(?<v>\S+) was slain by (?<m>\S+)\.$
+^(?<v>\S+) was slain by (?<w>\S+)\.$
+^(?<v>\S+) was slashed into gibs by (?<m>\S+) wielding (?<w>\S+)$
+^(?<v>\S+) was slashed into gibs by (?<m>\S+)\.$
+^(?<v>\S+) was slashed into gibs by (?<w>\S+)\.$
+^(?<v>\S+) was smashed into a boneless flesh pile by (?<m>\S+) wielding (?<w>\S+)$
+^(?<v>\S+) was smashed into a boneless flesh pile by (?<m>\S+)\.$
+^(?<v>\S+) was smashed into a boneless flesh pile by (?<w>\S+)\.$
+^(?<v>\S+) was smashed to death by (?<m>\S+) named (?<w>\S+)$
+^(?<v>\S+) was smashed to death by (?<m>\S+) wielding (?<w>\S+)$
+^(?<v>\S+) was smashed to death by (?<m>\S+)\.$
+^(?<v>\S+) was smashed to death by (?<w>\S+)\.$
+^(?<v>\S+) was stomped into mince by (?<m>\S+)\.$
+^(?<v>\S+) was stomped into mince by (?<w>\S+)\.$
+^(?<v>\S+) was stretched to death by (?<m>\S+) wielding (?<w>\S+)$
+^(?<v>\S+) was stretched to death by (?<m>\S+)\.$
+^(?<v>\S+) was stretched to death by (?<w>\S+)\.$
+^(?<v>\S+) was stung to death by (?<m>\S+) wielding (?<w>\S+)$
+^(?<v>\S+) was stung to death by (?<m>\S+)\.$
+^(?<v>\S+) was stung to death by (?<w>\S+)\.$
+^(?<v>\S+) was swarmed by (?<m>\S+)\.$
+^(?<v>\S+) was swarmed by (?<w>\S+)\.$
+^(?<v>\S+) was thrown off a cliff by (?<m>\S+)$
+^(?<v>\S+) was thrown off a cliff by (?<w>\S+)$
+^(?<v>\S+) was torn apart by (?<m>\S+) wielding (?<w>\S+)$
+^(?<v>\S+) was torn apart by (?<m>\S+)\.$
+^(?<v>\S+) was torn apart by (?<w>\S+)\.$
+^(?<v>\S+) was trampled to death by (?<m>\S+) named (?<w>\S+)$
+^(?<v>\S+) was trampled to death by (?<m>\S+) wielding (?<w>\S+)$
+^(?<v>\S+) was trampled to death by (?<m>\S+)\.$
+^(?<v>\S+) was trampled to death by (?<w>\S+)\.$
+^(?<v>\S+) was turned into a spider nest\.$
+^(?<v>\S+) was turned into ash by (?<m>\S+) wielding (?<w>\S+)$
+^(?<v>\S+) was turned into ash by (?<m>\S+)\.$
+^(?<v>\S+) was turned into ash by (?<w>\S+)\.$
+^(?<v>\S+) was turned into ash whilst fighting (?<m>\S+)$
+^(?<v>\S+) was turned into ash whilst fighting (?<w>\S+)$
+^(?<v>\S+) was violently severed into pieces by (?<m>\S+) wielding (?<w>\S+)$
+^(?<v>\S+) was violently severed into pieces by (?<m>\S+)\.$
+^(?<v>\S+) was violently severed into pieces by (?<w>\S+)\.$
+^(?<v>\S+) went inside (?<m>\S+) and died\.$
+^(?<v>\S+) went inside (?<w>\S+) and died\.$
+^(?<v>\S+) got stuck in a berry bush and died trying to escape (?<m>\S+)$
+^(?<v>\S+) assassinated themselves\.$
+^(?<v>\S+) became lava\.$
+^(?<v>\S+) blew themselves up with (a|an) (?<w>\S+)$
+^(?<v>\S+) broke apart from falling\.$
+^(?<v>\S+) broke their neck, and the rest of their body\.$
+^(?<v>\S+) burned apart\.$
+^(?<v>\S+) burned to death\.$
+^(?<v>\S+) burned up in lava\.$
+^(?<v>\S+) choked to death\.$
+^(?<v>\S+) combusted\.$
+^(?<v>\S+) committed suicide with (a|an) (?<w>\S+)$
+^(?<v>\S+) committed suicide\.$
+^(?<v>\S+) couldn't swim up quick enough\.$
+^(?<v>\S+) destroyed themselves with (a|an) (?<w>\S+)$
+^(?<v>\S+) died by mysterious means\.$
+^(?<v>\S+) died from an arrow trap\.$
+^(?<v>\S+) died from bee allergies\.$
+^(?<v>\S+) died from unknown causes\.$
+^(?<v>\S+) died inside a wall\.$
+^(?<v>\S+) died inside lava somehow\.$
+^(?<v>\S+) died randomly\.$
+^(?<v>\S+) died stuck in a berry bush\.$
+^(?<v>\S+) died stuck on a cactus\.$
+^(?<v>\S+) died suddenly\.$
+^(?<v>\S+) drank themselves dead\.$
+^(?<v>\S+) dried up and fell apart\.$
+^(?<v>\S+) drowned in lava\.$
+^(?<v>\S+) drowned\.$
+^(?<v>\S+) ended their own pitiful existence\.$
+^(?<v>\S+) ended their life\.$
+^(?<v>\S+) ended themselves\.$
+^(?<v>\S+) exhausted and died\.$
+^(?<v>\S+) exploded into gibs playing with fireworks\.$
+^(?<v>\S+) exploded themselves with (a|an) (?<w>\S+)$
+^(?<v>\S+) fell and crushed their insides with their legbones\.$
+^(?<v>\S+) fell and crushed their lungs with their legbones\.$
+^(?<v>\S+) fell and was reduced into a jittering flesh heap\.$
+^(?<v>\S+) fell and was reduced into a jittering flesh pile\.$
+^(?<v>\S+) fell into the void and instantly died\.$
+^(?<v>\S+) fell to death\.$
+^(?<v>\S+) fireballed themselves\.$
+^(?<v>\S+) forgot to breath air\.$
+^(?<v>\S+) forgot to eat\.$
+^(?<v>\S+) froze to death\.$
+^(?<v>\S+) gave up and faded away\.$
+^(?<v>\S+) gave up life\.$
+^(?<v>\S+) got stuck in a berry bush\.$
+^(?<v>\S+) got stuck on a cactus\.$
+^(?<v>\S+) had their health meter depleted\.$
+^(?<v>\S+) had their life instantly removed\.$
+^(?<v>\S+) hit the ground too hard\.$
+^(?<v>\S+) impaled themselves\.$
+^(?<v>\S+) killed themselves using magic\.$
+^(?<v>\S+) killed themselves\.$
+^(?<v>\S+) lost grip of a ladder and fell to death\.$
+^(?<v>\S+) lost grip of vines and fell to death\.$
+^(?<v>\S+) melted by fire\.$
+^(?<v>\S+) melted in lava\.$
+^(?<v>\S+) rubbed themselves too hard against a berry bush\.$
+^(?<v>\S+) rubbed themselves too hard against a cactus\.$
+^(?<v>\S+) rubbed themselves too hard against a cactus\.$
+^(?<v>\S+) shot themselves\.$
+^(?<v>\S+) smashed themselves against a cactus and instantly died\.$
+^(?<v>\S+) smashed themselves and died trying to fly with elytra\.$
+^(?<v>\S+) sprained their entire body and instantly died\.$
+^(?<v>\S+) starved to death\.$
+^(?<v>\S+) suffocated in water\.$
+^(?<v>\S+) suffocated\.$
+^(?<v>\S+) suicide bombed with (a|an) (?<w>\S+)$
+^(?<v>\S+) swam out of a waterfall and fell to death\.$
+^(?<v>\S+) took an arrow to the knee and died\.$
+^(?<v>\S+) tried to swim in lava and didn't get out quick enough\.$
+^(?<v>\S+) tripped too hard and died\.$
+^(?<v>\S+) tripped, broke a bone or died somehow inside lava\.$
+^(?<v>\S+) turned into ash\.$
+^(?<v>\S+) violently ended their own life with (a|an) (?<w>\S+)$
+^(?<v>\S+) was blown apart by an explosion\.$
+^(?<v>\S+) was boned to death by (?<w>\S+)$
+^(?<v>\S+) was boned to death\.$
+^(?<v>\S+) was buried alive\.$
+^(?<v>\S+) was buried alive\.$
+^(?<v>\S+) was consumed by living magma\.$
+^(?<v>\S+) was consumed by the void\.$
+^(?<v>\S+) was crushed by an anvil\.$
+^(?<v>\S+) was crushed, drowned, killed or something\.$
+^(?<v>\S+) was deleted by an explosion\.$
+^(?<v>\S+) was disintegrated by explosives\.$
+^(?<v>\S+) was fireballed to death\.$
+^(?<v>\S+) was hit by a dispensed arrow and died\.$
+^(?<v>\S+) was hit by a life erasing potion\.$
+^(?<v>\S+) was hit too hard by a fireball\.$
+^(?<v>\S+) was impaled by dripstone\.$
+^(?<v>\S+) was reduced to lava by lava\.$
+^(?<v>\S+) was reduced to mince from an anvil falling on them\.$
+^(?<v>\S+) was removed by an explosion\.$
+^(?<v>\S+) was smashed and reduced to mince\.$
+^(?<v>\S+) was smashed by an anvil\.$
+^(?<v>\S+) was struck by lightning and exploded\.$
+^(?<v>\S+) was stung to death by a berry bush\.$
+^(?<v>\S+) was stung to death by a cactus\.$
+^(?<v>\S+) was stung to death by cactus\.$
+^(?<v>\S+) was torn in half by an arrow trap\.$
+^(?<v>\S+) was turned into bloody rain by an explosion\.$
+^(?<v>\S+) was turned into red dust by an explosion\.$
+^(?<v>\S+) was utterly destroyed by an anvil\.$
+^(?<v>\S+) was utterly destroyed by an explosion\.$
+^(?<v>\S+) was violently separated by explosives\.$
+^(?<v>\S+) was violently severed by explosives\.$
+^(?<v>\S+) withered away\.$
+^The Zone claims (?<v>\S+)'s life\.$
+^(?<v>\S+) was pricked to death a pufferfish\.$
