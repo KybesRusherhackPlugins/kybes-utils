@@ -2,18 +2,24 @@ package de.kybe.KybesUtils.utils;
 
 import org.rusherhack.client.api.utils.ChatUtils;
 
+import javax.crypto.AEADBadTagException;
 import javax.crypto.Cipher;
-import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.GCMParameterSpec;
+import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
 import java.security.SecureRandom;
+import java.security.spec.KeySpec;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class ChatCrypto {
     private static final String START = "k©";
     private static final String END = "$%";
+    private static final int SALT_LEN = 16;
+    private static final int IV_LEN = 12;
+    private static final int TAG_LEN = 128;
 
     private final List<String> readKeys = Collections.synchronizedList(new ArrayList<>());
     private final AtomicReference<String> writeKey = new AtomicReference<>();
@@ -35,42 +41,34 @@ public class ChatCrypto {
         readKeys.clear();
     }
 
-    public void resetReadKeys(List<String> keys, boolean debug) {
-        synchronized (readKeys) {
-            readKeys.clear();
-            for (String key : keys) {
-                if (key != null && !key.trim().isEmpty()) {
-                    readKeys.add(key.trim());
-                    if (debug) ChatUtils.print("Read key added: " + key.trim());
-                }
-            }
-        }
-    }
-
     public String encrypt(String plaintext, boolean debug) throws Exception {
-        String key = writeKey.get();
-        if (key == null || key.isEmpty()) {
+        String password = writeKey.get();
+        if (password == null || password.isEmpty()) {
             if (debug) ChatUtils.print("Encryption failed: write key is not set.");
             throw new IllegalStateException("Write key is not set.");
         }
 
         if (debug) ChatUtils.print("Encrypting message...");
 
-        byte[] iv = new byte[16];
-        new SecureRandom().nextBytes(iv);
-        IvParameterSpec ivSpec = new IvParameterSpec(iv);
+        byte[] salt = new byte[SALT_LEN];
+        new SecureRandom().nextBytes(salt);
 
-        Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-        cipher.init(Cipher.ENCRYPT_MODE, makeKey(key), ivSpec);
+        SecretKeySpec key = deriveKey(password, salt);
+
+        byte[] iv = new byte[IV_LEN];
+        new SecureRandom().nextBytes(iv);
+
+        Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
+        cipher.init(Cipher.ENCRYPT_MODE, key, new GCMParameterSpec(TAG_LEN, iv));
         byte[] ciphertext = cipher.doFinal(plaintext.getBytes(StandardCharsets.UTF_8));
 
-        byte[] combined = new byte[iv.length + ciphertext.length];
-        System.arraycopy(iv, 0, combined, 0, iv.length);
-        System.arraycopy(ciphertext, 0, combined, iv.length, ciphertext.length);
-
-        if (debug) ChatUtils.print("Encryption complete.");
+        byte[] combined = new byte[salt.length + iv.length + ciphertext.length];
+        System.arraycopy(salt, 0, combined, 0, salt.length);
+        System.arraycopy(iv, 0, combined, salt.length, iv.length);
+        System.arraycopy(ciphertext, 0, combined, salt.length + iv.length, ciphertext.length);
 
         String encoded = Base64.getEncoder().encodeToString(combined);
+        if (debug) ChatUtils.print("Encryption complete.");
         return START + encoded + END;
     }
 
@@ -85,24 +83,28 @@ public class ChatCrypto {
             return null;
         }
 
-        if (data.length < 16) {
-            if (debug) ChatUtils.print("Data too short to contain IV.");
+        if (data.length < SALT_LEN + IV_LEN + 1) {
+            if (debug) ChatUtils.print("Data too short to decrypt.");
             return null;
         }
 
-        byte[] iv = Arrays.copyOfRange(data, 0, 16);
-        byte[] ciphertext = Arrays.copyOfRange(data, 16, data.length);
+        byte[] salt = Arrays.copyOfRange(data, 0, SALT_LEN);
+        byte[] iv = Arrays.copyOfRange(data, SALT_LEN, SALT_LEN + IV_LEN);
+        byte[] ciphertext = Arrays.copyOfRange(data, SALT_LEN + IV_LEN, data.length);
 
         synchronized (readKeys) {
-            for (String key : readKeys) {
+            for (String password : readKeys) {
                 try {
-                    Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-                    cipher.init(Cipher.DECRYPT_MODE, makeKey(key), new IvParameterSpec(iv));
-                    byte[] plaintextBytes = cipher.doFinal(ciphertext);
-                    String result = new String(plaintextBytes, StandardCharsets.UTF_8);
+                    SecretKeySpec key = deriveKey(password, salt);
+
+                    Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
+                    cipher.init(Cipher.DECRYPT_MODE, key, new GCMParameterSpec(TAG_LEN, iv));
+                    byte[] plaintext = cipher.doFinal(ciphertext);
 
                     if (debug) ChatUtils.print("Decryption succeeded.");
-                    return result;
+                    return new String(plaintext, StandardCharsets.UTF_8);
+                } catch (AEADBadTagException e) {
+                    if (debug) ChatUtils.print("Decryption failed: bad tag (wrong key or tampered data).");
                 } catch (Exception e) {
                     if (debug) ChatUtils.print("Decryption failed with one key, trying next...");
                 }
@@ -113,9 +115,11 @@ public class ChatCrypto {
         return null;
     }
 
-    private SecretKeySpec makeKey(String key) throws Exception {
-        byte[] hash = MessageDigest.getInstance("SHA-256").digest(key.getBytes(StandardCharsets.UTF_8));
-        return new SecretKeySpec(Arrays.copyOf(hash, 16), "AES");
+    private SecretKeySpec deriveKey(String password, byte[] salt) throws Exception {
+        SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
+        KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 100000, 128);
+        byte[] keyBytes = factory.generateSecret(spec).getEncoded();
+        return new SecretKeySpec(keyBytes, "AES");
     }
 
     public String handleInput(String user, String input, boolean debug) {
@@ -127,7 +131,6 @@ public class ChatCrypto {
         int startIdx = input.indexOf(START);
         int endIdx = input.indexOf(END);
 
-        // Case 1: full message in one packet
         if (startIdx != -1 && endIdx != -1 && startIdx < endIdx) {
             if (debug) ChatUtils.print("Full message in one packet.");
             String content = input.substring(startIdx + START.length(), endIdx);
@@ -135,7 +138,6 @@ public class ChatCrypto {
             return result != null ? result : "[Decryption failed]";
         }
 
-        // Case 2: message starts here
         if (startIdx != -1) {
             if (debug) ChatUtils.print("START detected. Resetting buffer.");
             buffer.setLength(0);
@@ -143,7 +145,6 @@ public class ChatCrypto {
             return null;
         }
 
-        // Case 3: message ends here
         buffer.append(input);
         int completeEndIdx = buffer.indexOf(END);
         if (completeEndIdx != -1) {

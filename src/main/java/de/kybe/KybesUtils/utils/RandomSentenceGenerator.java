@@ -12,7 +12,6 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class RandomSentenceGenerator {
-
     private static final int BUFFER_SIZE = 50;
     private static final Queue<String> sentenceBuffer = new LinkedList<>();
 

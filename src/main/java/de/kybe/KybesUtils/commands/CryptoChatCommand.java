@@ -15,6 +15,7 @@ public class CryptoChatCommand extends Command {
     private void say(String text) {
         if (CryptoChatModule.INSTANCE == null) {
             CryptoChatModule.log("CryptoChat module is not loaded.");
+            return;
         }
 
         CryptoChatModule.INSTANCE.queueMessage(text);
@@ -24,6 +25,7 @@ public class CryptoChatCommand extends Command {
     private void say() {
         if (CryptoChatModule.INSTANCE == null) {
             CryptoChatModule.log("CryptoChat module is not loaded.");
+            return;
         }
 
         CryptoChatModule.INSTANCE.clearSendQueue();
@@ -35,11 +37,13 @@ public class CryptoChatCommand extends Command {
     private void msg(String msg) {
         if (CryptoChatModule.INSTANCE == null) {
             CryptoChatModule.log("CryptoChat module is not loaded.");
+            return;
         }
 
         int spaceIndex = msg.indexOf(' ');
         if (spaceIndex == -1) {
             CryptoChatModule.log("Usage: .crypto-chat msg <target> <message>");
+            return;
         }
 
         String target = msg.substring(0, spaceIndex).trim();
@@ -47,6 +51,7 @@ public class CryptoChatCommand extends Command {
 
         if (target.isEmpty() || text.isEmpty()) {
             CryptoChatModule.log("Usage: *crypto-chat msg \"<target> <message>\"");
+            return;
         }
 
         CryptoChatModule.INSTANCE.queueDirectMessage(target, text);
@@ -58,6 +63,7 @@ public class CryptoChatCommand extends Command {
     private void setKey(String key) {
         if (CryptoChatModule.INSTANCE == null) {
             CryptoChatModule.log("CryptoChat module is not loaded.");
+            return;
         }
 
         CryptoChatModule.INSTANCE.setWriteKey(key);
@@ -69,6 +75,7 @@ public class CryptoChatCommand extends Command {
     private void addRead(String key) {
         if (CryptoChatModule.INSTANCE == null) {
             CryptoChatModule.log("CryptoChat module is not loaded.");
+            return;
         }
 
         CryptoChatModule.INSTANCE.addReadKey(key);
@@ -79,6 +86,7 @@ public class CryptoChatCommand extends Command {
     private void clearKeys() {
         if (CryptoChatModule.INSTANCE == null) {
             CryptoChatModule.log("CryptoChat module is not loaded.");
+            return;
         }
 
         CryptoChatModule.INSTANCE.clearReadKeys();
@@ -89,6 +97,7 @@ public class CryptoChatCommand extends Command {
     private void showKeys() {
         if (CryptoChatModule.INSTANCE == null) {
             CryptoChatModule.log("CryptoChat module is not loaded.");
+            return;
         }
 
         String writeKey = CryptoChatModule.INSTANCE.getWriteKey();

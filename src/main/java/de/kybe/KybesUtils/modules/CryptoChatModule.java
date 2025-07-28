@@ -21,6 +21,7 @@ import java.util.LinkedList;
 
 public class CryptoChatModule extends ToggleableModule {
     public static CryptoChatModule INSTANCE;
+
     public final BooleanSetting useChatPrefix = new BooleanSetting("UseChatPrefix", true);
     public final StringSetting chatPrefix = new StringSetting("chatPrefix", "+");    private final StringSetting encryptKey = new StringSetting("EncryptKey", "rusherhack")
             .onChange(this::updateCryptoKeys);
@@ -36,8 +37,10 @@ public class CryptoChatModule extends ToggleableModule {
     private final NumberSetting<Integer> sendDelaySeconds = new NumberSetting<>("SendDelay", "in seconds", 5, 0, 255);
     private final BooleanSetting ignoreSelf = new BooleanSetting("IgnoreSelf", false);
     private final BooleanSetting debug = new BooleanSetting("Debug", false).setHidden(true);
+
     private final ChatCrypto crypto = new ChatCrypto();
     private final LinkedList<SendItem> sendQueue = new LinkedList<>();
+
     private int sendTimer = 0;
     private SendItem currentSending = null;
     private int currentChunkIndex = 0;
@@ -266,20 +269,10 @@ public class CryptoChatModule extends ToggleableModule {
     }
 
     public static class SendItem {
+        public enum Type { DIRECT, CHAT }
         public Type type;
         public String directTarget;
         public String fullText;
         public ArrayList<String> chunks = new ArrayList<>();
-
-        public enum Type {
-            DIRECT,
-            CHAT
-        }
     }
-
-
-
-
-
-
 }
