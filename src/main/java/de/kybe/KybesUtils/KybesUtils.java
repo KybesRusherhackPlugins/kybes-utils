@@ -2,6 +2,7 @@ package de.kybe.KybesUtils;
 
 import de.kybe.KybesUtils.commands.CryptoChatCommand;
 import de.kybe.KybesUtils.commands.DeathMessageParserCommand;
+import de.kybe.KybesUtils.commands.KybeUtilsCommand;
 import de.kybe.KybesUtils.modules.*;
 import de.kybe.KybesUtils.utils.ChatCrypto;
 import org.rusherhack.client.api.RusherHackAPI;
@@ -15,12 +16,6 @@ public class KybesUtils extends Plugin {
         return INSTANCE;
     }
 
-    private final ChatCrypto crypto = new ChatCrypto();
-    public ChatCrypto getCrypto() {
-        return crypto;
-    }
-
-
     @Override
     public void onLoad() {
         RusherHackAPI.getModuleManager().registerFeature(new MockerModule());
@@ -32,9 +27,11 @@ public class KybesUtils extends Plugin {
         RusherHackAPI.getModuleManager().registerFeature(new BabyElytraModule());
         RusherHackAPI.getModuleManager().registerFeature(new FogParametersModule());
         RusherHackAPI.getModuleManager().registerFeature(new Rocket3Module());
+        RusherHackAPI.getModuleManager().registerFeature(new DontLimitMyFuckingFpsModule());
 
         RusherHackAPI.getCommandManager().registerFeature(new DeathMessageParserCommand());
         RusherHackAPI.getCommandManager().registerFeature(new CryptoChatCommand());
+        RusherHackAPI.getCommandManager().registerFeature(new KybeUtilsCommand());
 
         INSTANCE = this;
     }

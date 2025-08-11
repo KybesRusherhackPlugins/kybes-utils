@@ -6,7 +6,9 @@
   "client": [
     "ClientPacketListenerMixin",
     "Deadmau5EarsLayerMixin",
+    "FramerateLimitTrackerMixin",
     "IMixinClientPacketListener",
+    "IMixinMinecraft",
     "LevelRendererMixin",
     "WingsLayerMixin"
   ]

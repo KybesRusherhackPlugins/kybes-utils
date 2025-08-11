@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(Deadmau5EarsLayer.class)
-public class Deadmau5EarsLayerMixin {
+public abstract class Deadmau5EarsLayerMixin {
     @Redirect(
             method = "render(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILnet/minecraft/client/renderer/entity/state/PlayerRenderState;FF)V",
             at = @At(value = "INVOKE",
