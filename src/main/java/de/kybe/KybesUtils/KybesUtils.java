@@ -2,7 +2,6 @@ package de.kybe.KybesUtils;
 
 import de.kybe.KybesUtils.commands.CryptoChatCommand;
 import de.kybe.KybesUtils.commands.DeathMessageParserCommand;
-import de.kybe.KybesUtils.commands.MinecartCommands;
 import de.kybe.KybesUtils.modules.*;
 import de.kybe.KybesUtils.utils.ChatCrypto;
 import org.rusherhack.client.api.RusherHackAPI;
@@ -32,12 +31,9 @@ public class KybesUtils extends Plugin {
         RusherHackAPI.getModuleManager().registerFeature(new Deadmau5Module());
         RusherHackAPI.getModuleManager().registerFeature(new BabyElytraModule());
         RusherHackAPI.getModuleManager().registerFeature(new FogParametersModule());
-        RusherHackAPI.getModuleManager().registerFeature(new ChamsV2());
-        RusherHackAPI.getModuleManager().registerFeature(new MinecartDupe());
 
         RusherHackAPI.getCommandManager().registerFeature(new DeathMessageParserCommand());
         RusherHackAPI.getCommandManager().registerFeature(new CryptoChatCommand());
-        RusherHackAPI.getCommandManager().registerFeature(new MinecartCommands());
 
         INSTANCE = this;
     }

@@ -4,15 +4,10 @@
   "package": "de.kybe.KybesUtils.mixins",
   "compatibilityLevel": "JAVA_17",
   "client": [
-    "CapeLayerMixin",
     "ClientPacketListenerMixin",
     "Deadmau5EarsLayerMixin",
-    "EntityRenderDispatcherMixin",
-    "EntityRendererMixin",
-    "GameRendererMixin",
     "IMixinClientPacketListener",
     "LevelRendererMixin",
-    "LivingEntityRendererMixin",
     "WingsLayerMixin"
   ]
 }
