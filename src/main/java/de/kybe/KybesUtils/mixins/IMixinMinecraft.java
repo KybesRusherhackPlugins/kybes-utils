@@ -9,5 +9,5 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 public interface IMixinMinecraft {
     @Accessor("demo")
     @Mutable
-    public void setDemo(boolean demo);
+    void setDemo(boolean demo);
 }

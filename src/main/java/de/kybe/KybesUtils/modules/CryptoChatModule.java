@@ -122,6 +122,7 @@ public class CryptoChatModule extends ToggleableModule {
     }
 
     @Subscribe(priority = -1001)
+    @SuppressWarnings("unused")
     public void onPacket(EventPacket.Receive event) {
         if (mc.player == null) return;
         if (!(event.getPacket() instanceof ClientboundSystemChatPacket pkt)) return;
@@ -203,6 +204,7 @@ public class CryptoChatModule extends ToggleableModule {
     }
 
     @Subscribe
+    @SuppressWarnings("unused")
     public void onUpdate(EventUpdate event) {
         if (mc.getConnection() == null) return;
 

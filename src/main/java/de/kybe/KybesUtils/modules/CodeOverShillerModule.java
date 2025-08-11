@@ -54,12 +54,14 @@ public class CodeOverShillerModule extends ToggleableModule {
     }
 
     @Subscribe(stage = Stage.POST, priority = -1, ignoreCancelled = true)
+    @SuppressWarnings("unused")
     public void onPacketAfterAntiSpam(EventPacket.Receive event) {
         if (beforeAntispam.getValue()) return;
         inner(event);
     }
 
     @Subscribe(stage = Stage.PRE, priority = 1, ignoreCancelled = true)
+    @SuppressWarnings("unused")
     public void onPacketBeforeAntiSpam(EventPacket.Receive event) {
         if (!beforeAntispam.getValue()) return;
         inner(event);

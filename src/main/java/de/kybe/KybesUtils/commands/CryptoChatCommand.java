@@ -2,6 +2,7 @@ package de.kybe.KybesUtils.commands;
 
 import de.kybe.KybesUtils.modules.CryptoChatModule;
 import org.rusherhack.client.api.feature.command.Command;
+import org.rusherhack.client.api.feature.command.arg.PlayerReference;
 import org.rusherhack.core.command.annotations.CommandExecutor;
 
 public class CryptoChatCommand extends Command {
@@ -12,6 +13,7 @@ public class CryptoChatCommand extends Command {
 
     @CommandExecutor(subCommand = "say")
     @CommandExecutor.Argument({"string"})
+    @SuppressWarnings("unused")
     private void say(String text) {
         if (CryptoChatModule.INSTANCE == null) {
             CryptoChatModule.log("CryptoChat module is not loaded.");
@@ -22,7 +24,8 @@ public class CryptoChatCommand extends Command {
     }
 
     @CommandExecutor(subCommand = "clear-queue")
-    private void say() {
+    @SuppressWarnings("unused")
+    private void clearQueue() {
         if (CryptoChatModule.INSTANCE == null) {
             CryptoChatModule.log("CryptoChat module is not loaded.");
             return;
@@ -33,25 +36,8 @@ public class CryptoChatCommand extends Command {
     }
 
     @CommandExecutor(subCommand = "msg")
-    @CommandExecutor.Argument({"string", "string"})
-    private void msg(String text, String target) {
-        if (CryptoChatModule.INSTANCE == null) {
-            CryptoChatModule.log("CryptoChat module is not loaded.");
-            return;
-        }
-
-        if (target.isEmpty() || text.isEmpty()) {
-            CryptoChatModule.log("Usage: *crypto-chat msg \"<target> <message>\"");
-            return;
-        }
-
-        CryptoChatModule.INSTANCE.queueDirectMessage(target, text);
-        CryptoChatModule.log("Queued encrypted DM to " + target + ": " + text);
-    }
-
-    /*
-    @CommandExecutor(subCommand = "msg")
     @CommandExecutor.Argument({"target", "msg"})
+    @SuppressWarnings("unused")
     private void msg(PlayerReference target, String msg) {
         if (CryptoChatModule.INSTANCE == null) {
             CryptoChatModule.log("CryptoChat module is not loaded.");
@@ -66,10 +52,10 @@ public class CryptoChatCommand extends Command {
         CryptoChatModule.INSTANCE.queueDirectMessage(target.name(), msg);
         CryptoChatModule.log("Queued encrypted DM to " + target + ": " + msg);
     }
-     */
 
     @CommandExecutor(subCommand = "setkey")
     @CommandExecutor.Argument({"string"})
+    @SuppressWarnings("unused")
     private void setKey(String key) {
         if (CryptoChatModule.INSTANCE == null) {
             CryptoChatModule.log("CryptoChat module is not loaded.");
@@ -82,6 +68,7 @@ public class CryptoChatCommand extends Command {
 
     @CommandExecutor(subCommand = "addread")
     @CommandExecutor.Argument({"string"})
+    @SuppressWarnings("unused")
     private void addRead(String key) {
         if (CryptoChatModule.INSTANCE == null) {
             CryptoChatModule.log("CryptoChat module is not loaded.");
@@ -93,6 +80,7 @@ public class CryptoChatCommand extends Command {
     }
 
     @CommandExecutor(subCommand = "clearkeys")
+    @SuppressWarnings("unused")
     private void clearKeys() {
         if (CryptoChatModule.INSTANCE == null) {
             CryptoChatModule.log("CryptoChat module is not loaded.");
@@ -103,7 +91,8 @@ public class CryptoChatCommand extends Command {
         CryptoChatModule.log("All read keys cleared.");
     }
 
-    @CommandExecutor(subCommand = "showkeys")
+    @CommandExecutor(subCommand = "show-keys")
+    @SuppressWarnings("unused")
     private void showKeys() {
         if (CryptoChatModule.INSTANCE == null) {
             CryptoChatModule.log("CryptoChat module is not loaded.");

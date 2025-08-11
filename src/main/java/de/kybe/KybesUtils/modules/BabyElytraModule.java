@@ -3,7 +3,6 @@ package de.kybe.KybesUtils.modules;
 import org.rusherhack.client.api.feature.module.ModuleCategory;
 import org.rusherhack.client.api.feature.module.ToggleableModule;
 import org.rusherhack.core.setting.BooleanSetting;
-import org.rusherhack.core.setting.NumberSetting;
 import org.rusherhack.core.setting.StringSetting;
 
 public class BabyElytraModule extends ToggleableModule {

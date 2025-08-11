@@ -1,6 +1,5 @@
 package de.kybe.KybesUtils.modules;
 
-import net.minecraft.client.multiplayer.PlayerInfo;
 import org.rusherhack.client.api.events.client.EventUpdate;
 import org.rusherhack.client.api.feature.module.ModuleCategory;
 import org.rusherhack.client.api.feature.module.ToggleableModule;
@@ -8,7 +7,6 @@ import org.rusherhack.core.event.subscribe.Subscribe;
 import org.rusherhack.core.setting.BooleanSetting;
 import org.rusherhack.core.setting.NumberSetting;
 
-import java.util.List;
 import java.util.Random;
 
 import static de.kybe.KybesUtils.utils.RandomSentenceGenerator.getRandomSentence;
@@ -33,6 +31,7 @@ public class RandomSentenceModule extends ToggleableModule {
     }
 
     @Subscribe
+    @SuppressWarnings("unused")
     public void onTick(EventUpdate event) {
         if (mc.getConnection() == null) return;
         long now = System.currentTimeMillis();
@@ -58,16 +57,5 @@ public class RandomSentenceModule extends ToggleableModule {
         } else {
             mc.getConnection().sendChat(sentence);
         }
-    }
-
-    private PlayerInfo getRandomPlayer() {
-        assert mc.player != null;
-        List<PlayerInfo> onlinePlayers = (List<PlayerInfo>) mc.player.connection.getListedOnlinePlayers();
-
-        onlinePlayers.removeIf(info -> info.getProfile().getName().equals(mc.player.getGameProfile().getName()));
-
-        if (onlinePlayers.isEmpty()) return null;
-
-        return onlinePlayers.get(random.nextInt(onlinePlayers.size()));
     }
 }

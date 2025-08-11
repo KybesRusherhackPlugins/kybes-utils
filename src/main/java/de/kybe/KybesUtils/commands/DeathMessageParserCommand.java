@@ -11,6 +11,7 @@ public class DeathMessageParserCommand extends Command {
 
     @CommandExecutor
     @CommandExecutor.Argument({"string"})
+    @SuppressWarnings("unused")
     private String parse(String parse) {
         return DeathMessageParser.parse(parse).toString();
     }

@@ -59,12 +59,14 @@ public class MockerModule extends ToggleableModule {
     }
 
     @Subscribe(stage = Stage.POST, priority = -1, ignoreCancelled = true)
+    @SuppressWarnings("unused")
     public void onPacketAfterAntispam(EventPacket.Receive event) {
         if (beforeAntispam.getValue()) return;
         inner(event);
     }
 
     @Subscribe(stage = Stage.PRE, priority = 1, ignoreCancelled = true)
+    @SuppressWarnings("unused")
     public void onPacketBeforeAntispam(EventPacket.Receive event) {
         if (!beforeAntispam.getValue()) return;
         inner(event);

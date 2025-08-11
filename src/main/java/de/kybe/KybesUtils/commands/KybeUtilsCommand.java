@@ -14,6 +14,7 @@ public class KybeUtilsCommand extends Command {
 
     @CommandExecutor(subCommand = "demo")
     @CommandExecutor.Argument({"value"})
+    @SuppressWarnings("unused")
     private String echo(boolean value) {
         ((IMixinMinecraft) mc).setDemo(value);
         if (mc.isDemo()) {

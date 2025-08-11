@@ -47,6 +47,7 @@ public class Rocket3Module extends ToggleableModule {
     }
 
     @Subscribe
+    @SuppressWarnings("unused")
     private void onUpdate(EventUpdate event) {
         if (mc.player == null || mc.level == null || mc.gameMode == null) return;
         if (!(mc.player.containerMenu instanceof CraftingMenu menu)) return;
