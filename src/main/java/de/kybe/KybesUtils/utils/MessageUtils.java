@@ -1,6 +1,6 @@
 package de.kybe.KybesUtils.utils;
 
-import de.kybe.KybesUtils.mixins.ClientPacketListenerAccessor;
+import de.kybe.KybesUtils.mixins.IMixinClientPacketListener;
 import net.minecraft.network.chat.LastSeenMessagesTracker;
 import net.minecraft.network.chat.MessageSignature;
 import net.minecraft.network.chat.SignedMessageBody;
@@ -16,8 +16,8 @@ public class MessageUtils {
         if (mc.getConnection() == null) return;
         Instant instant = Instant.now();
         long l = Crypt.SaltSupplier.getLong();
-        LastSeenMessagesTracker.Update update = ((ClientPacketListenerAccessor) mc.getConnection()).kybe$getLastSeenMessages().generateAndApplyUpdate();
-        MessageSignature messageSignature = ((ClientPacketListenerAccessor) mc.getConnection()).kybe$getSignedMessageEncoder().pack(new SignedMessageBody(message, instant, l, update.lastSeen()));
+        LastSeenMessagesTracker.Update update = ((IMixinClientPacketListener) mc.getConnection()).kybe$getLastSeenMessages().generateAndApplyUpdate();
+        MessageSignature messageSignature = ((IMixinClientPacketListener) mc.getConnection()).kybe$getSignedMessageEncoder().pack(new SignedMessageBody(message, instant, l, update.lastSeen()));
         mc.getConnection().send(new ServerboundChatPacket(message, instant, l, messageSignature, update.update()));
     }
 }

@@ -33,21 +33,12 @@ public class CryptoChatCommand extends Command {
     }
 
     @CommandExecutor(subCommand = "msg")
-    @CommandExecutor.Argument({"string"})
-    private void msg(String msg) {
+    @CommandExecutor.Argument({"string", "string"})
+    private void msg(String text, String target) {
         if (CryptoChatModule.INSTANCE == null) {
             CryptoChatModule.log("CryptoChat module is not loaded.");
             return;
         }
-
-        int spaceIndex = msg.indexOf(' ');
-        if (spaceIndex == -1) {
-            CryptoChatModule.log("Usage: .crypto-chat msg <target> <message>");
-            return;
-        }
-
-        String target = msg.substring(0, spaceIndex).trim();
-        String text = msg.substring(spaceIndex + 1).trim();
 
         if (target.isEmpty() || text.isEmpty()) {
             CryptoChatModule.log("Usage: *crypto-chat msg \"<target> <message>\"");
@@ -57,6 +48,25 @@ public class CryptoChatCommand extends Command {
         CryptoChatModule.INSTANCE.queueDirectMessage(target, text);
         CryptoChatModule.log("Queued encrypted DM to " + target + ": " + text);
     }
+
+    /*
+    @CommandExecutor(subCommand = "msg")
+    @CommandExecutor.Argument({"target", "msg"})
+    private void msg(PlayerReference target, String msg) {
+        if (CryptoChatModule.INSTANCE == null) {
+            CryptoChatModule.log("CryptoChat module is not loaded.");
+            return;
+        }
+
+        if (msg.isEmpty()) {
+            CryptoChatModule.log("Usage: *crypto-chat msg <target> <message>");
+            return;
+        }
+
+        CryptoChatModule.INSTANCE.queueDirectMessage(target.name(), msg);
+        CryptoChatModule.log("Queued encrypted DM to " + target + ": " + msg);
+    }
+     */
 
     @CommandExecutor(subCommand = "setkey")
     @CommandExecutor.Argument({"string"})

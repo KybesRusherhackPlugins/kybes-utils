@@ -1,5 +1,5 @@
 {
-  "Plugin-Class": "de.kybe.KybesUtils.Main",
+  "Plugin-Class": "de.kybe.KybesUtils.KybesUtils",
   "Name": "${project.plugin_name}",
   "Version": "${project.plugin_version}",
   "Description": "",

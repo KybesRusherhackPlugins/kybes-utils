@@ -94,6 +94,7 @@ tasks.register('runPlugin', JavaExec) {
 		jvmArgs(
 				"-Drusherhack.enablePlugins=true",
 				"-Dfabric.addMods=${rusherLoaderJarPath}",
+				"-Ddevauth.enabled=true"
 		)
 	}
 }
