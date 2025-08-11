@@ -31,6 +31,7 @@ public class KybesUtils extends Plugin {
         RusherHackAPI.getModuleManager().registerFeature(new Deadmau5Module());
         RusherHackAPI.getModuleManager().registerFeature(new BabyElytraModule());
         RusherHackAPI.getModuleManager().registerFeature(new FogParametersModule());
+        RusherHackAPI.getModuleManager().registerFeature(new Rocket3Module());
 
         RusherHackAPI.getCommandManager().registerFeature(new DeathMessageParserCommand());
         RusherHackAPI.getCommandManager().registerFeature(new CryptoChatCommand());

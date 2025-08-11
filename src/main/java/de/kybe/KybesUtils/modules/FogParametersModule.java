@@ -12,8 +12,8 @@ import java.awt.*;
 public class FogParametersModule extends ToggleableModule {
     public static FogParametersModule INSTANCE;
 
-    public final NumberSetting<Float> start = new NumberSetting<>("start", 696969f, 0f, 696969f);
-    public final NumberSetting<Float> end = new NumberSetting<>("end", 0f, 0f, 696969f);
+    public final NumberSetting<Float> start = new NumberSetting<>("start", 1000f, 0f, 1000f);
+    public final NumberSetting<Float> end = new NumberSetting<>("end", 0f, 0f, 1000f);
     public final EnumSetting<FogShape> fogShape = new EnumSetting<>("fogShape", FogShape.SPHERE);
     public final ColorSetting color = new ColorSetting("color", new Color(0,0,0,0));
 
