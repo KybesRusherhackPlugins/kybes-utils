@@ -9,5 +9,8 @@
   ],
   "Minecraft-Versions": [
     "${project.minecraft_version}"
+  ],
+  "Mixin-Configs": [
+    "mixins.kybes-utils.json"
   ]
 }

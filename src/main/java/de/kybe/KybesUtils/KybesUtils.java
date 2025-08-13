@@ -30,7 +30,6 @@ public class KybesUtils extends Plugin {
         INSTANCE = this;
         if (TESTING) {
             RusherHackAPI.getWindowManager().registerFeature(new UserInfoWindow());
-
             return;
         }
 
