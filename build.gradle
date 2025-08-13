@@ -154,6 +154,11 @@ jar {
 	}
 }
 
+tasks.named("remapJar") {
+	archiveFileName.set("${project.plugin_name}.jar")
+	archiveVersion.set("")
+}
+
 //update access widener during intellij sync
 this.tasks.ideaSyncTask.dependsOn("updateAccessWidener")
 this.tasks.configureLaunch.dependsOn("updateAccessWidener")
