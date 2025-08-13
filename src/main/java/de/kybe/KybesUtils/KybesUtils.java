@@ -23,7 +23,7 @@ public class KybesUtils extends Plugin {
         return INSTANCE;
     }
 
-    private static boolean TESTING = true;
+    private static boolean TESTING = false;
 
     @Override
     public void onLoad() {

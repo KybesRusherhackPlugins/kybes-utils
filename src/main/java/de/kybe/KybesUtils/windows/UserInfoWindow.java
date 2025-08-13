@@ -9,7 +9,6 @@ import de.kybe.KybesUtils.utils.ComponentUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import org.lwjgl.glfw.GLFW;
-import org.rusherhack.client.api.bind.key.GLFWKey;
 import org.rusherhack.client.api.feature.window.ResizeableWindow;
 import org.rusherhack.client.api.ui.window.content.ComboContent;
 import org.rusherhack.client.api.ui.window.content.WindowContent;
@@ -42,10 +41,10 @@ public class UserInfoWindow extends ResizeableWindow {
     private final SharedWidthTracker connectionWidths = new SharedWidthTracker();
     private final SharedWidthTracker killsWidths = new SharedWidthTracker();
 
-    private boolean scheduledChatUpdate = false;
-    private boolean scheduledDeathUpdate = false;
-    private boolean scheduledConnectionUpdate = false;
-    private boolean scheduledKillUpdate = false;
+    private LoadState chatState = LoadState.NOT_LOADED;
+    private LoadState deathState = LoadState.NOT_LOADED;
+    private LoadState connectionState = LoadState.NOT_LOADED;
+    private LoadState killState = LoadState.NOT_LOADED;
 
     private int currentChatsPage = 0;
     private int currentDeathsPage = 0;
@@ -60,32 +59,48 @@ public class UserInfoWindow extends ResizeableWindow {
     private final List<String> targetHistory = new ArrayList<>();
     private int historyIndex = -1;
 
-    private final PlayerHistoryManager historyManager;
-
     private final TextFieldComponent targetName = new TextFieldComponent(this, 125);
     private String target = "";
+
+    public enum LoadState {
+        NOT_LOADED,
+        LOADING,
+        LOADED_MORE_AVAILABLE,
+        LOADED_NO_MORE
+    }
 
     public UserInfoWindow() {
         super("2b2t", 250, 400);
 
         this.setMinHeight(250);
 
-        this.historyManager = new PlayerHistoryManager();
-
         // Chat View
-        chatView.setContextMenu(List.of(new ContextAction("Load more", this::loadMoreChats)));
+        chatView.setContextMenu(List.of(
+                new ContextAction("Load more", this::loadMoreChats),
+                new ContextAction("Reload", this::reloadActiveTab)
+        ));
         this.content.add(chatView);
 
         // Death View
-        deathView.setContextMenu(List.of(new ContextAction("Load more", this::loadMoreDeaths)));
+        deathView.setContextMenu(List.of(
+                new ContextAction("Load more", this::loadMoreDeaths),
+                new ContextAction("Reload", this::reloadActiveTab)
+        ));
         this.content.add(deathView);
 
         // Connection View
-        connectionView.setContextMenu(List.of(new ContextAction("Load more", this::loadMoreConnections)));
+        connectionView.setContextMenu(List.of(
+                new ContextAction("Load more", this::loadMoreConnections),
+                new ContextAction("Reload", this::reloadActiveTab)
+        ));
         this.content.add(connectionView);
 
         // Kills View
-        killsView.setContextMenu(List.of(new ContextAction("Load more", this::loadMoreKills)));
+        killsView.setContextMenu(List.of(
+                new ContextAction("Load more", this::loadMoreKills),
+                new ContextAction("Reload", this::reloadActiveTab)
+        ));
+
         this.content.add(killsView);
 
         final ComboContent targetNameComboContent = new ComboContent(this);
@@ -110,18 +125,18 @@ public class UserInfoWindow extends ResizeableWindow {
         this.target = target;
 
         if (addToHistory) {
-            // Trim forward history if we navigated back before
             while (targetHistory.size() > historyIndex + 1) {
-                targetHistory.remove(targetHistory.size() - 1);
+                targetHistory.removeLast();
             }
             targetHistory.add(target);
             historyIndex = targetHistory.size() - 1;
         }
 
-        scheduledConnectionUpdate = false;
-        scheduledChatUpdate = false;
-        scheduledDeathUpdate = false;
-        scheduledKillUpdate = false;
+        chatState = LoadState.NOT_LOADED;
+        deathState = LoadState.NOT_LOADED;
+        connectionState = LoadState.NOT_LOADED;
+        killState = LoadState.NOT_LOADED;
+
         currentChatsPage = 0;
         currentConnectionsPage = 0;
         currentDeathsPage = 0;
@@ -134,14 +149,22 @@ public class UserInfoWindow extends ResizeableWindow {
         deaths.clear();
         connections.clear();
         kills.clear();
-        loadMoreChats();
-        loadMoreDeaths();
-        loadMoreConnections();
-        loadMoreKills();
+        reloadActiveTab();
     }
 
     @Override
     public void tick() {
+        WindowView activeTab = tabbedView.getActiveTabView();
+        if (activeTab == chatView && chatState == LoadState.NOT_LOADED) {
+            loadMoreChats();
+        } else if (activeTab == deathView && deathState == LoadState.NOT_LOADED) {
+            loadMoreDeaths();
+        } else if (activeTab == connectionView && connectionState == LoadState.NOT_LOADED) {
+            loadMoreConnections();
+        } else if (activeTab == killsView && killState == LoadState.NOT_LOADED) {
+            loadMoreKills();
+        }
+
         double connectionViewScrollOffset = connectionView.getScrollbar().getScrollOffset();
         double connectionViewMax = connectionView.getContentHeight() - connectionView.getHeight();
         if (connectionViewScrollOffset >= connectionViewMax && connectionViewMax > 0) {
@@ -172,6 +195,31 @@ public class UserInfoWindow extends ResizeableWindow {
         }
     }
 
+    private void reloadActiveTab() {
+        WindowView activeTab = tabbedView.getActiveTabView();
+        if (activeTab == chatView) {
+            chats.clear();
+            currentChatsPage = 0;
+            chatState = LoadState.NOT_LOADED;
+            loadMoreChats();
+        } else if (activeTab == deathView) {
+            deaths.clear();
+            currentDeathsPage = 0;
+            deathState = LoadState.NOT_LOADED;
+            loadMoreDeaths();
+        } else if (activeTab == connectionView) {
+            connections.clear();
+            currentConnectionsPage = 0;
+            connectionState = LoadState.NOT_LOADED;
+            loadMoreConnections();
+        } else if (activeTab == killsView) {
+            kills.clear();
+            currentKillsPage = 0;
+            killState = LoadState.NOT_LOADED;
+            loadMoreKills();
+        }
+    }
+
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
         if (button == GLFW.GLFW_MOUSE_BUTTON_4) { // Back
@@ -191,13 +239,17 @@ public class UserInfoWindow extends ResizeableWindow {
     }
 
     private void loadMoreChats() {
-        if (scheduledChatUpdate) return;
-        scheduledChatUpdate = true;
+        if (chatState == LoadState.LOADING || chatState == LoadState.LOADED_NO_MORE) return;
+
+        chatState = LoadState.LOADING;
 
         CompletableFuture
                 .supplyAsync(() -> KybesUtils.getInstance().getVcApi().getChats(target, currentChatsPage))
-                .thenAccept(optionalResponse -> optionalResponse.ifPresent(chatResponse ->
-                        uiTasks.add(() -> {
+                .thenAccept(optionalResponse -> optionalResponse.ifPresentOrElse(chatResponse -> {
+                    uiTasks.add(() -> {
+                        if (chatResponse.getChats().isEmpty()) {
+                            chatState = LoadState.LOADED_NO_MORE;
+                        } else {
                             for (ChatEntry entry : chatResponse.getChats()) {
                                 List<Component> cols = List.of(
                                         ComponentUtils.formatTime(entry.getTime()),
@@ -220,25 +272,32 @@ public class UserInfoWindow extends ResizeableWindow {
                                 chats.add(chatComponent);
                             }
                             currentChatsPage++;
-                            scheduledChatUpdate = false;
-                        })
-                ))
+                            chatState = LoadState.LOADED_MORE_AVAILABLE;
+                        }
+                    });
+                }, () -> {
+                    uiTasks.add(() -> chatState = LoadState.LOADED_NO_MORE);
+                }))
                 .exceptionally(ex -> {
                     ex.printStackTrace();
-                    scheduledChatUpdate = false;
+                    uiTasks.add(() -> chatState = LoadState.NOT_LOADED);
                     return null;
                 });
     }
 
     private void loadMoreDeaths() {
         if (target.isEmpty()) return;
-        if (scheduledDeathUpdate) return;
-        scheduledDeathUpdate = true;
+        if (deathState == LoadState.LOADING || deathState == LoadState.LOADED_NO_MORE) return;
+
+        deathState = LoadState.LOADING;
 
         CompletableFuture
                 .supplyAsync(() -> KybesUtils.getInstance().getVcApi().getDeaths(target, currentDeathsPage))
-                .thenAccept(optionalResponse -> optionalResponse.ifPresent(deathResponse ->
-                        uiTasks.add(() -> {
+                .thenAccept(optionalResponse -> optionalResponse.ifPresentOrElse(deathResponse -> {
+                    uiTasks.add(() -> {
+                        if (deathResponse.getDeaths().isEmpty()) {
+                            deathState = LoadState.LOADED_NO_MORE;
+                        } else {
                             for (DeathEntry entry : deathResponse.getDeaths()) {
                                 List<Component> cols = List.of(
                                         ComponentUtils.formatTime(entry.getTime()),
@@ -270,25 +329,32 @@ public class UserInfoWindow extends ResizeableWindow {
                                 deaths.add(deathComponent);
                             }
                             currentDeathsPage++;
-                            scheduledDeathUpdate = false;
-                        })
-                ))
+                            deathState = LoadState.LOADED_MORE_AVAILABLE;
+                        }
+                    });
+                }, () -> {
+                    uiTasks.add(() -> deathState = LoadState.LOADED_NO_MORE);
+                }))
                 .exceptionally(ex -> {
                     ex.printStackTrace();
-                    scheduledDeathUpdate = false;
+                    uiTasks.add(() -> deathState = LoadState.NOT_LOADED);
                     return null;
                 });
     }
 
     private void loadMoreKills() {
         if (target.isEmpty()) return;
-        if (scheduledKillUpdate) return;
-        scheduledKillUpdate = true;
+        if (killState == LoadState.LOADING || killState == LoadState.LOADED_NO_MORE) return;
+
+        killState = LoadState.LOADING;
 
         CompletableFuture
                 .supplyAsync(() -> KybesUtils.getInstance().getVcApi().getKills(target, currentKillsPage))
-                .thenAccept(optionalResponse -> optionalResponse.ifPresent(killResponse ->
-                        uiTasks.add(() -> {
+                .thenAccept(optionalResponse -> optionalResponse.ifPresentOrElse(killResponse -> {
+                    uiTasks.add(() -> {
+                        if (killResponse.getKills().isEmpty()) {
+                            killState = LoadState.LOADED_NO_MORE;
+                        } else {
                             for (KillEntry entry : killResponse.getKills()) {
                                 List<Component> cols = List.of(
                                         ComponentUtils.formatTime(entry.getTime()),
@@ -320,25 +386,32 @@ public class UserInfoWindow extends ResizeableWindow {
                                 kills.add(killComponent);
                             }
                             currentKillsPage++;
-                            scheduledKillUpdate = false;
-                        })
-                ))
+                            killState = LoadState.LOADED_MORE_AVAILABLE;
+                        }
+                    });
+                }, () -> {
+                    uiTasks.add(() -> killState = LoadState.LOADED_NO_MORE);
+                }))
                 .exceptionally(ex -> {
                     ex.printStackTrace();
-                    scheduledKillUpdate = false;
+                    uiTasks.add(() -> killState = LoadState.NOT_LOADED);
                     return null;
                 });
     }
 
     private void loadMoreConnections() {
         if (target.isEmpty()) return;
-        if (scheduledConnectionUpdate) return;
-        scheduledConnectionUpdate = true;
+        if (connectionState == LoadState.LOADING || connectionState == LoadState.LOADED_NO_MORE) return;
+
+        connectionState = LoadState.LOADING;
 
         CompletableFuture
                 .supplyAsync(() -> KybesUtils.getInstance().getVcApi().getConnections(target, currentConnectionsPage))
-                .thenAccept(optionalResponse -> optionalResponse.ifPresent(connectionResponse ->
-                        uiTasks.add(() -> {
+                .thenAccept(optionalResponse -> optionalResponse.ifPresentOrElse(connectionResponse -> {
+                    uiTasks.add(() -> {
+                        if (connectionResponse.getConnections().isEmpty()) {
+                            connectionState = LoadState.LOADED_NO_MORE;
+                        } else {
                             for (ConnectionEntry entry : connectionResponse.getConnections()) {
                                 ChatFormatting color = entry.getConnection().toString().equalsIgnoreCase("JOIN")
                                         ? ChatFormatting.GREEN
@@ -358,12 +431,15 @@ public class UserInfoWindow extends ResizeableWindow {
                                 connections.add(connectionComponent);
                             }
                             currentConnectionsPage++;
-                            scheduledConnectionUpdate = false;
-                        })
-                ))
+                            connectionState = LoadState.LOADED_MORE_AVAILABLE;
+                        }
+                    });
+                }, () -> {
+                    uiTasks.add(() -> connectionState = LoadState.LOADED_NO_MORE);
+                }))
                 .exceptionally(ex -> {
                     ex.printStackTrace();
-                    scheduledConnectionUpdate = false;
+                    uiTasks.add(() -> connectionState = LoadState.NOT_LOADED);
                     return null;
                 });
     }

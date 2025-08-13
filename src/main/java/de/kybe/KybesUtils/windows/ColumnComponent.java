@@ -22,7 +22,6 @@ public class ColumnComponent extends WindowContent {
         this.widthTracker = widthTracker;
         this.rawColumns = rawColumns;
 
-        // Update column widths when created
         this.widthTracker.updateWidths(this.columns, getFontRenderer());
     }
 
