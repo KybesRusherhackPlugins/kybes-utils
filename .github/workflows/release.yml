@@ -31,8 +31,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.ref_name }}
-          release_name: Release ${{ github.ref_name }}
+          tag_name: main-${{ github.sha }}
+          release_name: ${{ github.sha }}
+          body: |
+            [${{ github.sha }}](https://github.com/kybe236/rusherhack-kybes-utils/commit/${{ github.sha }})
           draft: false
           prerelease: false
 
