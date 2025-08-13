@@ -117,8 +117,6 @@ public class CryptoChatModule extends ToggleableModule {
                 crypto.addReadKey(key, debug.getValue());
             }
         }
-
-        log("Keys updated. WriteKey: '" + encryptKey.getValue() + "', ReadKeys count: " + crypto.getReadKeys().size());
     }
 
     @Subscribe(priority = -1001)
