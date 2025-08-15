@@ -27,18 +27,17 @@ jobs:
           version=$(grep '^plugin_version' gradle.properties | cut -d'=' -f2 | xargs)
           echo "version=$version" >> $GITHUB_ENV
 
-      - name: Get compare link
+      - name: Get compare linkg
         id: get_compare
         run: |
-          LAST_TAG=$(git describe --tags --abbrev=0 || echo "")
-          CURRENT_TAG=v${{ env.version }}-${GITHUB_SHA::7}  # optional: short SHA
+          LAST_TAG=$(git tag --sort=-creatordate | head -n1 || echo "")
+          CURRENT_TAG=v${{ env.version }}-${GITHUB_SHA}
           if [ -n "$LAST_TAG" ]; then
             COMPARE_URL="https://github.com/${GITHUB_REPOSITORY}/compare/$LAST_TAG...$CURRENT_TAG"
           else
             COMPARE_URL="https://github.com/${GITHUB_REPOSITORY}/commits/$CURRENT_TAG"
           fi
           echo "compare_url=$COMPARE_URL" >> $GITHUB_ENV
-
       - name: Get Minecraft Versions
         id: get_minecraft_versions
         run: |
