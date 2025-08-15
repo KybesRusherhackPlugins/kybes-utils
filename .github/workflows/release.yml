@@ -43,8 +43,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.sha }}
-          release_name: ${{ env.version }} for ${{ env.minecraft_versions }} on ${{ github.sha }}
+          tag_name: v${{ env.version }}-${{ github.sha }}
+          release_name: ${{ env.version }} for ${{ env.minecraft_versions }}
           body: |
             full changes: https://github.com/kybe236/rusherhack-kybes-utils/tree/${{ github.sha }}
             version: ${{ env.version }}
