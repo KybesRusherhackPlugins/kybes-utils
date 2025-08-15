@@ -48,6 +48,8 @@ public class UserInfoWindow extends ResizeableWindow {
     private LoadState connectionState = LoadState.NOT_LOADED;
     private LoadState killState = LoadState.NOT_LOADED;
 
+    ButtonComponent buttonComponent;
+
     private int currentChatsPage = 0;
     private int currentDeathsPage = 0;
     private int currentConnectionsPage = 0;
@@ -107,7 +109,7 @@ public class UserInfoWindow extends ResizeableWindow {
 
         final ComboContent targetNameComboContent = new ComboContent(this);
         targetNameComboContent.addContent(targetName);
-        ButtonComponent buttonComponent = new ButtonComponent(
+        this.buttonComponent = new ButtonComponent(
                 this,
                 "Submit",
                 50,
@@ -238,6 +240,14 @@ public class UserInfoWindow extends ResizeableWindow {
             return true;
         }
         return super.mouseClicked(mouseX, mouseY, button);
+    }
+
+    @Override
+    public boolean keyTyped(int key, int scanCode, int modifiers) {
+        if (key == GLFW.GLFW_KEY_ENTER) {
+            this.buttonComponent.onClick();
+        }
+        return super.keyTyped(key, scanCode, modifiers);
     }
 
     private void loadMoreChats() {
