@@ -46,7 +46,7 @@ jobs:
           tag_name: v${{ env.version }}-${{ github.sha }}
           release_name: ${{ env.version }} for ${{ env.minecraft_versions }}
           body: |
-            full changes: https://github.com/kybe236/rusherhack-kybes-utils/tree/v${{ env.version }}-${{ github.sha }}
+            full changes: [view commit(s)](https://github.com/kybe236/rusherhack-kybes-utils/tree/v${{ env.version }}-${{ github.sha }})
             version: ${{ env.version }}
             mc version(s): ${{ env.minecraft_versions }}
           draft: false
