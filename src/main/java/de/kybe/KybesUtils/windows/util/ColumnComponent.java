@@ -1,5 +1,6 @@
-package de.kybe.KybesUtils.windows.vc;
+package de.kybe.KybesUtils.windows.util;
 
+import de.kybe.KybesUtils.windows.vc.UserInfoWindow;
 import net.minecraft.network.chat.Component;
 import org.rusherhack.client.api.feature.window.Window;
 import org.rusherhack.client.api.ui.window.content.WindowContent;

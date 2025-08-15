@@ -1,4 +1,4 @@
-package de.kybe.KybesUtils.windows.vc;
+package de.kybe.KybesUtils.windows.util;
 
 import net.minecraft.network.chat.Component;
 import org.rusherhack.client.api.render.font.IFontRenderer;

@@ -5,6 +5,7 @@ import de.kybe.KybesUtils.commands.CryptoChatCommand;
 import de.kybe.KybesUtils.commands.DeathMessageParserCommand;
 import de.kybe.KybesUtils.commands.KybeUtilsCommand;
 import de.kybe.KybesUtils.modules.*;
+import de.kybe.KybesUtils.windows.chat.ChatWindow;
 import de.kybe.KybesUtils.windows.vc.UserInfoWindow;
 import org.rusherhack.client.api.RusherHackAPI;
 import org.rusherhack.client.api.plugin.Plugin;
@@ -29,7 +30,7 @@ public class KybesUtils extends Plugin {
     public void onLoad() {
         INSTANCE = this;
         if (TESTING) {
-            RusherHackAPI.getModuleManager().registerFeature(new BannerClonerModule());
+            RusherHackAPI.getWindowManager().registerFeature(new ChatWindow());
             return;
         }
 
@@ -50,6 +51,7 @@ public class KybesUtils extends Plugin {
         RusherHackAPI.getCommandManager().registerFeature(new KybeUtilsCommand());
 
         RusherHackAPI.getWindowManager().registerFeature(new UserInfoWindow());
+        RusherHackAPI.getWindowManager().registerFeature(new ChatWindow());
     }
 
     @Override

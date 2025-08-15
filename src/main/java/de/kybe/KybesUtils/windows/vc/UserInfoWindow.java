@@ -6,6 +6,8 @@ import de.kybe.KybesUtils.VcAPI.model.ConnectionEntry;
 import de.kybe.KybesUtils.VcAPI.model.DeathEntry;
 import de.kybe.KybesUtils.VcAPI.model.KillEntry;
 import de.kybe.KybesUtils.utils.ComponentUtils;
+import de.kybe.KybesUtils.windows.util.ColumnComponent;
+import de.kybe.KybesUtils.windows.util.SharedWidthTracker;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import org.lwjgl.glfw.GLFW;
@@ -120,7 +122,7 @@ public class UserInfoWindow extends ResizeableWindow {
         INTANCE = this;
     }
 
-    void setTarget(String target, boolean addToHistory) {
+    public void setTarget(String target, boolean addToHistory) {
         if (!Objects.equals(targetName.getValue(), target)) targetName.setValue(target);
         this.target = target;
 
