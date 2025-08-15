@@ -31,7 +31,7 @@ jobs:
         id: get_minecraft_versions
         run: |
           mc_version=$(grep '^minecraft_version' gradle.properties | cut -d'=' -f2 | xargs)
-          versions=$(jq -r --arg mc_version "$mc_version" '.["Minecraft-Versions"] | map(if . == "${project.minecraft_version}" then $mc_version else . end) | join(", ")' rusherhack-plugin.json)
+          versions=$(jq -r --arg mc_version "$mc_version" '.["Minecraft-Versions"] | map(if . == "${project.minecraft_version}" then $mc_version else . end) | join(", ")' src/main/resources/rusherhack-plugin.json)
           echo "minecraft_versions=$versions" >> $GITHUB_ENV
 
       - name: Build with Gradle
