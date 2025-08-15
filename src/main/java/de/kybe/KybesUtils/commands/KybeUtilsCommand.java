@@ -11,7 +11,6 @@ public class KybeUtilsCommand extends Command {
         this.addAliases("ku");
     }
 
-
     @CommandExecutor(subCommand = "demo")
     @CommandExecutor.Argument({"value"})
     @SuppressWarnings("unused")

@@ -1,4 +1,4 @@
-package de.kybe.KybesUtils.windows;
+package de.kybe.KybesUtils.windows.vc;
 
 import de.kybe.KybesUtils.KybesUtils;
 import de.kybe.KybesUtils.VcAPI.model.ChatEntry;

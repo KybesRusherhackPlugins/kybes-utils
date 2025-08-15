@@ -7,7 +7,6 @@ on:
 jobs:
   build:
     permissions: write-all
-    name: Build and Release
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -22,8 +21,21 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
+      - name: Get Version
+        id: get_version
+        run: |
+          version=$(grep '^plugin_version' gradle.properties | cut -d'=' -f2 | xargs)
+          echo "version=$version" >> $GITHUB_ENV
+
+      - name: Get Minecraft Versions
+        id: get_minecraft_versions
+        run: |
+          mc_version=$(grep '^minecraft_version' gradle.properties | cut -d'=' -f2 | xargs)
+          versions=$(jq -r --arg mc_version "$mc_version" '.["Minecraft-Versions"] | map(if . == "${project.minecraft_version}" then $mc_version else . end) | join(", ")' rusherhack-plugin.json)
+          echo "minecraft_versions=$versions" >> $GITHUB_ENV
+
       - name: Build with Gradle
-        run: ./gradlew build
+        run: ./gradlew build --no-daemon
 
       - name: Create Release
         id: create_release
@@ -31,10 +43,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: main-${{ github.sha }}
-          release_name: ${{ github.sha }}
+          tag_name: ${{ github.sha }}
+          release_name: ${{ env.version }} for ${{ env.minecraft_versions }} on ${{ github.sha }}
           body: |
-            [${{ github.sha }}](https://github.com/kybe236/rusherhack-kybes-utils/commit/${{ github.sha }})
+            full changes: https://github.com/kybe236/rusherhack-kybes-utils/tree/${{ github.sha }}
+            version: ${{ env.version }}
+            mc version(s): ${{ env.minecraft_versions }}
           draft: false
           prerelease: false
 

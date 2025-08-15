@@ -5,7 +5,7 @@ import de.kybe.KybesUtils.commands.CryptoChatCommand;
 import de.kybe.KybesUtils.commands.DeathMessageParserCommand;
 import de.kybe.KybesUtils.commands.KybeUtilsCommand;
 import de.kybe.KybesUtils.modules.*;
-import de.kybe.KybesUtils.windows.UserInfoWindow;
+import de.kybe.KybesUtils.windows.vc.UserInfoWindow;
 import org.rusherhack.client.api.RusherHackAPI;
 import org.rusherhack.client.api.plugin.Plugin;
 
@@ -29,7 +29,7 @@ public class KybesUtils extends Plugin {
     public void onLoad() {
         INSTANCE = this;
         if (TESTING) {
-            RusherHackAPI.getWindowManager().registerFeature(new UserInfoWindow());
+            RusherHackAPI.getModuleManager().registerFeature(new BannerClonerModule());
             return;
         }
 
@@ -43,6 +43,7 @@ public class KybesUtils extends Plugin {
         RusherHackAPI.getModuleManager().registerFeature(new FogParametersModule());
         RusherHackAPI.getModuleManager().registerFeature(new Rocket3Module());
         RusherHackAPI.getModuleManager().registerFeature(new DontLimitMyFuckingFpsModule());
+        RusherHackAPI.getModuleManager().registerFeature(new BannerClonerModule());
 
         RusherHackAPI.getCommandManager().registerFeature(new DeathMessageParserCommand());
         RusherHackAPI.getCommandManager().registerFeature(new CryptoChatCommand());
