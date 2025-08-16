@@ -7,6 +7,7 @@
     "ChatScreenMixin",
     "ClientPacketListenerMixin",
     "Deadmau5EarsLayerMixin",
+    "DimensionSpecialEffectsMixin",
     "FramerateLimitTrackerMixin",
     "IMixinChatComponent",
     "IMixinClientPacketListener",
