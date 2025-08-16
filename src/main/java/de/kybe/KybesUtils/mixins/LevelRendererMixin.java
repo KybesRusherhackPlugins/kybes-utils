@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.*;
 public abstract class LevelRendererMixin {
     // FogParametersModule
     @ModifyVariable(method = "addMainPass", at = @At("HEAD"), argsOnly = true)
-    private FogParameters modifyFogParams(FogParameters original) {
+    private FogParameters addMainPass$Head(FogParameters original) {
         if (FogParametersModule.INSTANCE != null && FogParametersModule.INSTANCE.isToggled()) {
             FogParametersModule module = FogParametersModule.INSTANCE;
             return new FogParameters(

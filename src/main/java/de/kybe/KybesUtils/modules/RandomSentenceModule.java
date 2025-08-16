@@ -13,9 +13,9 @@ import static de.kybe.KybesUtils.utils.RandomSentenceGenerator.getRandomSentence
 
 public class RandomSentenceModule extends ToggleableModule {
     private final Random random = new Random();
-    NumberSetting<Integer> minDelaySeconds = new NumberSetting<>("Min Delay (s)", 10, 0, 100);
-    NumberSetting<Integer> maxDelaySeconds = new NumberSetting<>("Max Delay (s)", 20, 0, 100);
-    BooleanSetting randomWhisper = new BooleanSetting("Whisper Randomly", false);
+    NumberSetting<Integer> minDelaySeconds = new NumberSetting<>("MinDelay", "(s)", 10, 0, 100);
+    NumberSetting<Integer> maxDelaySeconds = new NumberSetting<>("MaxDelay"," (s)",  20, 0, 100);
+    BooleanSetting randomWhisper = new BooleanSetting("WhisperRandomly", false);
     private long lastMessageTime = 0;
     private long nextDelayMs = 0;
 

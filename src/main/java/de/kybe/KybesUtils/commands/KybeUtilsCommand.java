@@ -15,7 +15,7 @@ public class KybeUtilsCommand extends Command {
     @CommandExecutor.Argument({"value"})
     @SuppressWarnings("unused")
     private String echo(boolean value) {
-        ((IMixinMinecraft) mc).setDemo(value);
+        ((IMixinMinecraft) mc).kybe$setDemo(value);
         if (mc.isDemo()) {
             return "Set Minecraft to demo mode.";
         } else {

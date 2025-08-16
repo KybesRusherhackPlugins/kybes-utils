@@ -9,7 +9,7 @@ public class Deadmau5Module extends ToggleableModule {
     public static Deadmau5Module INSTANCE;
 
     public final BooleanSetting allPlayers = new BooleanSetting("AllPlayers", true);
-    public final StringSetting players = new StringSetting("players", "2kybe3");
+    public final StringSetting players = new StringSetting("Players", "2kybe3");
 
     public Deadmau5Module() {
         super("Deadmau5", ModuleCategory.MISC);

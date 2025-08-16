@@ -20,22 +20,22 @@ import java.util.Random;
 
 public class DeathMockerModule extends ToggleableModule {
     private final StringSetting format = new StringSetting(
-            "Message Format",
+            "MessageFormat",
             "Format ({name} = name, {rand} = random string, ; separates entries)",
             "how tf did you die {name} | {rand};how can you be soooo bad {name} | {rand}"
     );
 
     private final NumberSetting<Integer> randomMessagePartLength = new NumberSetting<>(
-            "Random Length",
+            "RandomLength",
             "Length of random string",
             15, 0, 255
     );
 
     private final EnumSetting<Mode> mode = new EnumSetting<>("Mode", Mode.Direct);
 
-    private final StringSetting ignoreList = new StringSetting("Ignore List", "(, seperated)", "");
+    private final StringSetting ignoreList = new StringSetting("IgnoreList", "(, seperated)", "");
 
-    private final BooleanSetting beforeAntispam = new BooleanSetting("Before Anti Spam", false);
+    private final BooleanSetting beforeAntispam = new BooleanSetting("BeforeAntiSpam", false);
 
     private final BooleanSetting debug = new BooleanSetting("debug", false).setHidden(true);
     private final Random random = new Random();

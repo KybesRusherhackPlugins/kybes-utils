@@ -13,7 +13,7 @@ public abstract class Deadmau5EarsLayerMixin {
             at = @At(value = "INVOKE",
                     target = "Ljava/lang/String;equals(Ljava/lang/Object;)Z")
     )
-    private boolean alwaysTrueEquals(String self, Object other) {
+    private boolean render$Invoke(String self, Object other) {
         if (!(other instanceof String name)) return false;
 
         Deadmau5Module module = Deadmau5Module.INSTANCE;

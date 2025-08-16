@@ -23,15 +23,15 @@ public class CryptoChatModule extends ToggleableModule {
     public static CryptoChatModule INSTANCE;
 
     public final BooleanSetting useChatPrefix = new BooleanSetting("UseChatPrefix", true);
-    public final StringSetting chatPrefix = new StringSetting("chatPrefix", "+");    private final StringSetting encryptKey = new StringSetting("EncryptKey", "rusherhack")
+    public final StringSetting chatPrefix = new StringSetting("ChatPrefix", "+");    private final StringSetting encryptKey = new StringSetting("EncryptKey", "rusherhack")
             .onChange(this::updateCryptoKeys);
-    public final BooleanSetting allChatMessages = new BooleanSetting("allChatMessages", false);
-    private final StringSetting chatRegex = new StringSetting("Chat Regex", "(Group 1 = name, 2 = msg)",
+    public final BooleanSetting allChatMessages = new BooleanSetting("AllChatMessages", false);
+    private final StringSetting chatRegex = new StringSetting("ChatRegex", "(Group 1 = name, 2 = msg)",
             "^<([a-zA-Z0-9_]+)>\\s*>*\\s*(.+)$");    private final StringSetting decryptKeys = new StringSetting("DecryptKeys", "(comma separated)", "rusherhack")
             .onChange(this::updateCryptoKeys);
-    private final StringSetting msgRegex = new StringSetting("Message Regex", "(Group 1 = name, 2 = msg)",
+    private final StringSetting msgRegex = new StringSetting("MessageRegex", "(Group 1 = name, 2 = msg)",
             "^([a-zA-Z0-9_]+) whispers: (.+)$");
-    private final StringSetting outboundDirectMsgRegex = new StringSetting("Outbound Direct Msg Regex", "(Group 1 = target, 2 = msg)",
+    private final StringSetting outboundDirectMsgRegex = new StringSetting("OutboundDirectMsgRegex", "(Group 1 = target, 2 = msg)",
             "^to ([a-zA-Z0-9_]+): (.+)$");
     private final NumberSetting<Integer> maxChatLength = new NumberSetting<>("MaxChatLength", 50, 0, 255);
     private final NumberSetting<Integer> sendDelaySeconds = new NumberSetting<>("SendDelay", "in seconds", 5, 0, 255);

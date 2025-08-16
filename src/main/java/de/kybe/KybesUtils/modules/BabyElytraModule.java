@@ -9,7 +9,7 @@ public class BabyElytraModule extends ToggleableModule {
     public static BabyElytraModule INSTANCE;
 
     public final BooleanSetting allPlayers = new BooleanSetting("AllPlayers", true);
-    public final StringSetting players = new StringSetting("players", "2kybe3");
+    public final StringSetting players = new StringSetting("Players", "2kybe3");
 
     public BabyElytraModule() {
         super("BabyElytra", ModuleCategory.MISC);

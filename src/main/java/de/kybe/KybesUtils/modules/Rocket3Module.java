@@ -18,7 +18,7 @@ import java.util.List;
 
 public class Rocket3Module extends ToggleableModule {
 
-    public final NumberSetting<Integer> delay = new NumberSetting<>("Delay (ticks)", 10, 0, 20);
+    public final NumberSetting<Integer> delay = new NumberSetting<>("Delay", "(ticks)", 10, 0, 20);
     int ticks = 0;
 
     public Rocket3Module() {

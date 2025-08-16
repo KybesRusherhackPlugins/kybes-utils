@@ -10,7 +10,6 @@ import net.minecraft.world.level.block.entity.BannerPatternLayers;
 import org.rusherhack.client.api.events.client.EventUpdate;
 import org.rusherhack.client.api.feature.module.ModuleCategory;
 import org.rusherhack.client.api.feature.module.ToggleableModule;
-import org.rusherhack.client.api.utils.ChatUtils;
 import org.rusherhack.core.event.subscribe.Subscribe;
 import org.rusherhack.core.setting.NumberSetting;
 
@@ -18,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BannerClonerModule extends ToggleableModule {
-    public final NumberSetting<Integer> delay = new NumberSetting<>("Delay (ticks)", 10, 0, 20);
+    public final NumberSetting<Integer> delay = new NumberSetting<>("Delay", "(ticks)", 10, 0, 20);
     int ticks = 0;
 
     public BannerClonerModule() {

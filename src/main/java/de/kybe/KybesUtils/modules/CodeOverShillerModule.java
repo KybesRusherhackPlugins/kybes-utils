@@ -18,30 +18,30 @@ import java.util.regex.Pattern;
 
 public class CodeOverShillerModule extends ToggleableModule {
     private final StringSetting format = new StringSetting(
-            "Message Format",
+            "MessageFormat",
             "Format ({name} = name, {rand} = random string, ; separates entries)",
             "code kybe better, trust {name} :-)"
     );
 
     private final NumberSetting<Integer> randomMessagePartLength = new NumberSetting<>(
-            "Random Length",
+            "RandomLength",
             "Length of random string",
             15, 0, 255
     );
 
     private final StringSetting codeRegex = new StringSetting(
-            "Code Regex",
+            "CodeRegex",
             "(1 group = name)",
             "(?i)^<([a-zA-Z0-9_]+)>\\s*>*\\s*(?=.*code)(?=.*rusherhack).+$"
     );
 
     private final StringSetting ignoreList = new StringSetting(
-            "Ignore List",
+            "IgnoreList",
             "(, seperated)",
             "2kybe3"
     );
 
-    private final BooleanSetting beforeAntispam = new BooleanSetting("Before Anti Spam", false);
+    private final BooleanSetting beforeAntispam = new BooleanSetting("BeforeAntiSpam", false);
 
     private final BooleanSetting debug = new BooleanSetting("debug", false).setHidden(true);
 

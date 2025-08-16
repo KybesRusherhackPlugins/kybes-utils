@@ -44,7 +44,7 @@ public class KybesUtils extends Plugin {
         RusherHackAPI.getModuleManager().registerFeature(new Rocket3Module());
         RusherHackAPI.getModuleManager().registerFeature(new DontLimitMyFuckingFpsModule());
         RusherHackAPI.getModuleManager().registerFeature(new BannerClonerModule());
-        RusherHackAPI.getModuleManager().registerFeature(new ChatCopy());
+        RusherHackAPI.getModuleManager().registerFeature(new ChatCopyModule());
 
         RusherHackAPI.getCommandManager().registerFeature(new DeathMessageParserCommand());
         RusherHackAPI.getCommandManager().registerFeature(new CryptoChatCommand());

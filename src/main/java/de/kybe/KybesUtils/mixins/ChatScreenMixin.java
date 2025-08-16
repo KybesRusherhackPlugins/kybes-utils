@@ -1,6 +1,6 @@
 package de.kybe.KybesUtils.mixins;
 
-import de.kybe.KybesUtils.modules.ChatCopy;
+import de.kybe.KybesUtils.modules.ChatCopyModule;
 import net.minecraft.client.GuiMessage;
 import net.minecraft.client.gui.components.ChatComponent;
 import net.minecraft.client.gui.screens.ChatScreen;
@@ -15,8 +15,8 @@ import static org.rusherhack.client.api.Globals.mc;
 @Mixin(ChatScreen.class)
 public class ChatScreenMixin {
     @Inject(method = "mouseClicked", at = @At("HEAD"), cancellable = true)
-    private void onMouseClicked(double mouseX, double mouseY, int button, CallbackInfoReturnable<Boolean> cir) {
-        if (button != GLFW.GLFW_MOUSE_BUTTON_2 || !ChatCopy.INSTANCE.isToggled()) return;
+    private void mouseClicked$Head(double mouseX, double mouseY, int button, CallbackInfoReturnable<Boolean> cir) {
+        if (button != GLFW.GLFW_MOUSE_BUTTON_2 || !ChatCopyModule.INSTANCE.isToggled()) return;
 
         ChatComponent chatComponent = mc.gui.getChat();
         IMixinChatComponent iMixinChatComponent = (IMixinChatComponent) chatComponent;

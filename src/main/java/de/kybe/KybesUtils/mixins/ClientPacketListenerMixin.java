@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(ClientPacketListener.class)
 public abstract class ClientPacketListenerMixin {
     @Inject(method = "sendChat", at = @At("HEAD"), order = 20000, cancellable = true)
-    private void onSendChat(String message, CallbackInfo ci) {
+    private void sendChat$Head(String message, CallbackInfo ci) {
         if (CryptoChatModule.INSTANCE == null || !CryptoChatModule.INSTANCE.isToggled()) return;
         if (CryptoChatModule.INSTANCE.allChatMessages.getValue()) {
             ci.cancel();

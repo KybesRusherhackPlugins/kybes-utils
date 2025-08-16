@@ -16,7 +16,7 @@ public abstract class WingsLayerMixin {
             method = "render(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILnet/minecraft/client/renderer/entity/state/HumanoidRenderState;FF)V",
             at = @At(value = "FIELD", target = "Lnet/minecraft/client/renderer/entity/state/HumanoidRenderState;isBaby:Z", opcode = Opcodes.GETFIELD)
     )
-    private boolean modifyElytraModel(HumanoidRenderState instance, Operation<Boolean> original) {
+    private boolean render$WrapOperation(HumanoidRenderState instance, Operation<Boolean> original) {
         if (BabyElytraModule.INSTANCE != null && BabyElytraModule.INSTANCE.isToggled()) {
             if (instance instanceof PlayerRenderState ps) {
                 String playerName = ps.name;

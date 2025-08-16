@@ -13,7 +13,7 @@ public abstract class FramerateLimitTrackerMixin {
     @Shadow private int framerateLimit;
 
     @Inject(method = "getFramerateLimit", at = @At("HEAD"), cancellable = true)
-    private void getFramerateLimit(CallbackInfoReturnable<Integer> cir) {
+    private void getFramerateLimit$Head(CallbackInfoReturnable<Integer> cir) {
         if (DontLimitMyFuckingFpsModule.getInstance() != null && DontLimitMyFuckingFpsModule.getInstance().isToggled()) {
             cir.setReturnValue(this.framerateLimit);
         }

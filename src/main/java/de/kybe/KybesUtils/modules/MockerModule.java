@@ -20,24 +20,24 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class MockerModule extends ToggleableModule {
-    private final NumberSetting<Double> triggerChance = new NumberSetting<>("Trigger Chance", "0 = never, 100 = always", 100.0, 0.0, 100.0);
-    private final NumberSetting<Integer> maxTriggerLength = new NumberSetting<>("Max Trigger Message Length", 15, 0, 255);
+    private final NumberSetting<Double> triggerChance = new NumberSetting<>("TriggerChance", "0 = never, 100 = always", 100.0, 0.0, 100.0);
+    private final NumberSetting<Integer> maxTriggerLength = new NumberSetting<>("MaxTriggerMessageLength", 15, 0, 255);
 
-    private final StringSetting ignoreList = new StringSetting("Ignore List", "Players to ignore (, separated)", "2kybe3");
-    private final StringSetting forceList = new StringSetting("Force List", "Players who are always cloned (, separated)", "Tilley8");
-    private final StringSetting ignoreWords = new StringSetting("Ignored Words", "Words to filter out messages (, separated, : means AND)", "gay,attracted:men");
+    private final StringSetting ignoreList = new StringSetting("IgnoreList", "Players to ignore (, separated)", "2kybe3");
+    private final StringSetting forceList = new StringSetting("ForceList", "Players who are always cloned (, separated)", "Tilley8");
+    private final StringSetting ignoreWords = new StringSetting("IgnoredWords", "Words to filter out messages (, separated, : means AND)", "gay,attracted:men");
 
-    private final BooleanSetting globalMessageSupport = new BooleanSetting("Global Message Trigger", "Should global messages trigger?", true);
-    private final BooleanSetting directMessageSupport = new BooleanSetting("Direct Message Trigger", "Should private messages trigger?", true);
-    private final BooleanSetting globalMessageDirectMessageReply = new BooleanSetting("Global -> Direct Reply", "Reply to global message privately?", false);
-    private final BooleanSetting directMessageDirectMessageReply = new BooleanSetting("Direct -> Direct Reply", "Reply to DM privately?", true);
-    private final BooleanSetting beforeAntispam = new BooleanSetting("Before Anti Spam", false);
+    private final BooleanSetting globalMessageSupport = new BooleanSetting("GlobalMessageTrigger", "Should global messages trigger?", true);
+    private final BooleanSetting directMessageSupport = new BooleanSetting("DirectMessageTrigger", "Should private messages trigger?", true);
+    private final BooleanSetting globalMessageDirectMessageReply = new BooleanSetting("Global -> DirectReply", "Reply to global message privately?", false);
+    private final BooleanSetting directMessageDirectMessageReply = new BooleanSetting("Direct -> DirectReply", "Reply to DM privately?", true);
+    private final BooleanSetting beforeAntispam = new BooleanSetting("BeforeAntiSpam", false);
 
-    private final StringSetting format = new StringSetting("Message Format", "Format ({msg} = message, {rand} = random string)", "\"{msg}\" | {rand}");
+    private final StringSetting format = new StringSetting("MessageFormat", "Format ({msg} = message, {rand} = random string)", "\"{msg}\" | {rand}");
     private final NumberSetting<Integer> randomMessagePartLength = new NumberSetting<>("Random Length", "Length of random string", 15, 0, 255);
-    private final BooleanSetting derpCaps = new BooleanSetting("Derp Caps", "Random case letters", true);
-    private final StringSetting chatRegex = new StringSetting("Chat Regex", "(Group 1 = name, 2 = msg)", "^<([a-zA-Z0-9_]+)>\\s*>*\\s*(.+)$");
-    private final StringSetting msgRegex = new StringSetting("Message Regex", "(Group 1 = name, 2 = msg)", "^([a-zA-Z0-9_]+) whispers: (.+)$");
+    private final BooleanSetting derpCaps = new BooleanSetting("DerpCaps", "Random case letters", true);
+    private final StringSetting chatRegex = new StringSetting("ChatRegex", "(Group 1 = name, 2 = msg)", "^<([a-zA-Z0-9_]+)>\\s*>*\\s*(.+)$");
+    private final StringSetting msgRegex = new StringSetting("MessageRegex", "(Group 1 = name, 2 = msg)", "^([a-zA-Z0-9_]+) whispers: (.+)$");
 
     private final BooleanSetting debug = new BooleanSetting("debug", false).setHidden(true);
 
@@ -46,10 +46,10 @@ public class MockerModule extends ToggleableModule {
     public MockerModule() {
         super("Mocker", ModuleCategory.CHAT);
 
-        NullSetting lists = new NullSetting("Comma-Separated Lists");
+        NullSetting lists = new NullSetting("Comma-SeparatedLists");
         lists.addSubSettings(ignoreList, forceList, ignoreWords);
 
-        NullSetting msgType = new NullSetting("Message Type");
+        NullSetting msgType = new NullSetting("MessageType");
         msgType.addSubSettings(globalMessageSupport, directMessageSupport, globalMessageDirectMessageReply, directMessageDirectMessageReply);
 
         NullSetting formats = new NullSetting("Formats");
@@ -86,8 +86,7 @@ public class MockerModule extends ToggleableModule {
             return;
         }
 
-        if (debug.getValue())
-            ChatUtils.print("Parsed message from: " + data.name + " msg: " + data.message + " direct: " + data.direct);
+        if (debug.getValue()) ChatUtils.print("Parsed message from: " + data.name + " msg: " + data.message + " direct: " + data.direct);
 
         if (shouldIgnoreSender(data.name)) {
             if (debug.getValue()) ChatUtils.print("Ignored sender: " + data.name);
