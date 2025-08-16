@@ -3,11 +3,9 @@ package de.kybe.KybesUtils.utils;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ChatMessageParser {
-    private final Pattern pattern;
-
-    public ChatMessageParser(String regex) {
-        this.pattern = Pattern.compile(regex);
+public record ChatMessageParser(Pattern pattern) {
+    public ChatMessageParser(String pattern) {
+        this(Pattern.compile(pattern));
     }
 
     public ChatMessage parse(String raw) {

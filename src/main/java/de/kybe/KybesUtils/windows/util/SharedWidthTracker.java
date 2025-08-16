@@ -46,15 +46,4 @@ public class SharedWidthTracker {
             widths.add(0.0);
         }
     }
-
-    public SharedWidthTracker copy() {
-        SharedWidthTracker copy = new SharedWidthTracker(this.padding);
-        copy.widths.addAll(this.widths);
-        return copy;
-    }
-
-    public void setFrom(SharedWidthTracker other) {
-        widths.clear();
-        widths.addAll(other.widths);
-    }
 }

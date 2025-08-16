@@ -3,11 +3,9 @@ package de.kybe.KybesUtils.utils;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class OutboundDirectMessageParser {
-    private final Pattern pattern;
-
-    public OutboundDirectMessageParser(String regex) {
-        this.pattern = Pattern.compile(regex);
+public record OutboundDirectMessageParser(Pattern pattern) {
+    public OutboundDirectMessageParser(String pattern) {
+        this(Pattern.compile(pattern));
     }
 
     public OutboundDirectMessage parse(String raw) {

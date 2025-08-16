@@ -11,10 +11,12 @@ public class KillsResponse {
         return kills;
     }
 
+    @SuppressWarnings("unused")
     public int getTotal() {
         return total;
     }
 
+    @SuppressWarnings("unused")
     public int getPageCount() {
         return pageCount;
     }

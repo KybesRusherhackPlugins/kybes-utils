@@ -53,6 +53,7 @@ public class CodeOverShillerModule extends ToggleableModule {
     }
 
     @Subscribe(stage = Stage.POST, priority = -1, ignoreCancelled = true)
+    @SuppressWarnings("unused")
     public void onChatMessageAddBeforeAntiSPam(EventAddChat event) {
         if (beforeAntispam.getValue()) return;
         inner(event);

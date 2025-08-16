@@ -1,8 +1,5 @@
 package de.kybe.KybesUtils.utils;
 
-import net.minecraft.client.gui.components.PlayerFaceRenderer;
-import net.minecraft.client.renderer.entity.EntityRenderer;
-import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import org.rusherhack.client.api.utils.ChatUtils;
 
 import javax.crypto.AEADBadTagException;

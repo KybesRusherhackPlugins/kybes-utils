@@ -31,7 +31,7 @@ public class BannerClonerModule extends ToggleableModule {
         for (int slot = 0; slot < menu.slots.size(); slot++) {
             ItemStack itemStack = menu.getSlot(slot).getItem();
             if (itemStack.isEmpty() || !(itemStack.getItem() instanceof BannerItem)) continue;
-            BannerPatternLayers bannerPatternLayers = (BannerPatternLayers) itemStack.get(DataComponents.BANNER_PATTERNS);
+            BannerPatternLayers bannerPatternLayers = itemStack.get(DataComponents.BANNER_PATTERNS);
             if (bannerPatternLayers == null) continue;
             if (bannerPatternLayers.layers().isEmpty()) continue;
             slots.add(slot);
@@ -50,8 +50,8 @@ public class BannerClonerModule extends ToggleableModule {
                 DyeColor otherColor = otherBannerItem.getColor();
                 if (color != otherColor) continue;
             }
-            BannerPatternLayers bannerPatternLayers = (BannerPatternLayers) itemStack.get(DataComponents.BANNER_PATTERNS);
-            BannerPatternLayers otherBannerPatternLayers = (BannerPatternLayers) banner.get(DataComponents.BANNER_PATTERNS);
+            BannerPatternLayers bannerPatternLayers = itemStack.get(DataComponents.BANNER_PATTERNS);
+            BannerPatternLayers otherBannerPatternLayers = banner.get(DataComponents.BANNER_PATTERNS);
             if (bannerPatternLayers == null || otherBannerPatternLayers == null) continue;
             if (bannerPatternLayers.layers().isEmpty() && otherBannerPatternLayers.layers().isEmpty()) continue;
             if (!bannerPatternLayers.layers().isEmpty() && !otherBannerPatternLayers.layers().isEmpty()) continue;

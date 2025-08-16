@@ -11,10 +11,12 @@ public class DeathsResponse {
         return deaths;
     }
 
+    @SuppressWarnings("unused")
     public int getTotal() {
         return total;
     }
 
+    @SuppressWarnings("unused")
     public int getPageCount() {
         return pageCount;
     }

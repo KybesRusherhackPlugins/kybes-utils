@@ -4,52 +4,44 @@ import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
 import net.minidev.json.JSONValue;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.LinkedList;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.util.Queue;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class RandomSentenceGenerator {
     private static final int BUFFER_SIZE = 50;
-    private static final Queue<String> sentenceBuffer = new LinkedList<>();
+    private static final Queue<String> sentenceBuffer = new ConcurrentLinkedQueue<>();
+    private static final HttpClient httpClient = HttpClient.newHttpClient();
 
-    public static synchronized String getRandomSentence() {
-        try {
-            if (sentenceBuffer.isEmpty()) {
-                refillBuffer();
-            }
-            return sentenceBuffer.poll();
-        } catch (Exception e) {
-            return "";
+    public static CompletableFuture<String> getRandomSentenceAsync() {
+        if (!sentenceBuffer.isEmpty()) {
+            return CompletableFuture.completedFuture(sentenceBuffer.poll());
         }
+
+        return refillBufferAsync().thenApply(v -> sentenceBuffer.poll());
     }
 
-    private static void refillBuffer() throws Exception {
-        String apiUrl = "https://api.tatoeba.org/unstable/sentences?lang=eng&word_count=5-15&sort=random&limit=" + BUFFER_SIZE + "&showtrans=eng";
+    private static CompletableFuture<Void> refillBufferAsync() {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(buildApiUrl()))
+                .GET()
+                .build();
 
-        URL url = new URL(apiUrl);
-        HttpURLConnection con = (HttpURLConnection) url.openConnection();
-        con.setRequestMethod("GET");
+        return httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenApply(HttpResponse::body)
+                .thenAccept(RandomSentenceGenerator::parseAndFill);
+    }
 
-        int status = con.getResponseCode();
-        if (status != 200) {
-            throw new RuntimeException("Failed : HTTP error code : " + status);
-        }
+    private static String buildApiUrl() {
+        return "https://api.tatoeba.org/unstable/sentences?lang=eng&word_count=5-15&sort=random&limit=" + BUFFER_SIZE + "&showtrans=eng";
+    }
 
-        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-        StringBuilder content = new StringBuilder();
-        String inputLine;
-
-        while ((inputLine = in.readLine()) != null) {
-            content.append(inputLine);
-        }
-
-        in.close();
-        con.disconnect();
-
-        JSONObject jsonResponse = (JSONObject) JSONValue.parse(content.toString());
+    private static void parseAndFill(String body) {
+        JSONObject jsonResponse = (JSONObject) JSONValue.parse(body);
         JSONArray dataArray = (JSONArray) jsonResponse.get("data");
 
         for (Object obj : dataArray) {

@@ -84,6 +84,7 @@ public class VcApi {
         return get(uri, ConnectionsResponse.class);
     }
 
+    @SuppressWarnings("CallToPrintStackTrace")
     private <T> Optional<T> get(final String uri, final Class<T> responseType) {
         try {
             HttpRequest request = HttpRequest.newBuilder()

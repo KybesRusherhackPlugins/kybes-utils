@@ -53,6 +53,7 @@ public class ChatWindow extends ResizeableWindow {
     }
 
     @Subscribe(priority = -1)
+    @SuppressWarnings("unused")
     public void onChat(EventAddChat event) {
         scrollableView.add(event.getChatComponent(), -1);
     }

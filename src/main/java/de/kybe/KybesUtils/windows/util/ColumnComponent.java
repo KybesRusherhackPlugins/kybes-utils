@@ -58,15 +58,11 @@ public class ColumnComponent extends WindowContent {
         final List<ContextAction> contextMenu = new ArrayList<>();
         for (ItemReference item : copyItems) {
             if (this.rawColumns.get(item.index).isEmpty()) continue;
-            contextMenu.add(new ContextAction(item.name, () -> {
-                mc.keyboardHandler.setClipboard(this.rawColumns.get(item.index));
-            }));
+            contextMenu.add(new ContextAction(item.name, () -> mc.keyboardHandler.setClipboard(this.rawColumns.get(item.index))));
         }
         for (ItemReference item : targetItems) {
             if (this.rawColumns.get(item.index).isEmpty()) continue;
-            contextMenu.add(new ContextAction(item.name, () -> {
-                UserInfoWindow.INTANCE.setTarget(this.rawColumns.get(item.index), true);
-            }));
+            contextMenu.add(new ContextAction(item.name, () -> UserInfoWindow.INSTANCE.setTarget(this.rawColumns.get(item.index), true)));
         }
         return contextMenu;
     }

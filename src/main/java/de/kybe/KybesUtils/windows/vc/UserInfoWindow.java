@@ -25,8 +25,9 @@ import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+@SuppressWarnings({"ExtractMethodRecommender", "DuplicatedCode", "CallToPrintStackTrace"})
 public class UserInfoWindow extends ResizeableWindow {
-    public static UserInfoWindow INTANCE;
+    public static UserInfoWindow INSTANCE;
 
     private final List<WindowContent> chats = new ArrayList<>();
     private final List<WindowContent> deaths = new ArrayList<>();
@@ -114,14 +115,12 @@ public class UserInfoWindow extends ResizeableWindow {
                 "Submit",
                 50,
                 getFontRenderer().getFontHeight() * 1.25,
-                () -> {
-                    setTarget(targetName.getValue().strip(), true);
-                }
+                () -> setTarget(targetName.getValue().strip(), true)
         );
         targetNameComboContent.addContent(buttonComponent, ComboContent.AnchorSide.RIGHT);
         this.content.add(targetNameComboContent);
 
-        INTANCE = this;
+        INSTANCE = this;
     }
 
     public void setTarget(String target, boolean addToHistory) {
@@ -257,39 +256,35 @@ public class UserInfoWindow extends ResizeableWindow {
 
         CompletableFuture
                 .supplyAsync(() -> KybesUtils.getInstance().getVcApi().getChats(target, currentChatsPage))
-                .thenAccept(optionalResponse -> optionalResponse.ifPresentOrElse(chatResponse -> {
-                    uiTasks.add(() -> {
-                        if (chatResponse.getChats().isEmpty()) {
-                            chatState = LoadState.LOADED_NO_MORE;
-                        } else {
-                            for (ChatEntry entry : chatResponse.getChats()) {
-                                List<Component> cols = List.of(
-                                        ComponentUtils.formatTime(entry.getTime()),
-                                        ComponentUtils.formatName(entry.getPlayerName().strip()),
-                                        ComponentUtils.formatChat(entry.getChat().strip())
-                                );
-                                List<String> rawCols = List.of(
-                                        ComponentUtils.formatTimeStringRaw(entry.getTime()),
-                                        entry.getPlayerName().strip(),
-                                        entry.getUuid().toString(),
-                                        entry.getChat().strip()
-                                );
-                                ColumnComponent chatComponent = new ColumnComponent(this, cols, rawCols, chatWidths);
-                                chatComponent.addCopyItem(0, "Copy Time");
-                                chatComponent.addCopyItem(1, "Copy Player Name");
-                                chatComponent.addCopyItem(2, "Copy UUID");
-                                chatComponent.addCopyItem(3, "Copy Chat Message");
-                                chatComponent.addTargetItem(2, "View UUID");
-                                chatComponent.addTargetItem(1, "View Name");
-                                chats.add(chatComponent);
-                            }
-                            currentChatsPage++;
-                            chatState = LoadState.LOADED_MORE_AVAILABLE;
+                .thenAccept(optionalResponse -> optionalResponse.ifPresentOrElse(chatResponse -> uiTasks.add(() -> {
+                    if (chatResponse.getChats().isEmpty()) {
+                        chatState = LoadState.LOADED_NO_MORE;
+                    } else {
+                        for (ChatEntry entry : chatResponse.getChats()) {
+                            List<Component> cols = List.of(
+                                    ComponentUtils.formatTime(entry.getTime()),
+                                    ComponentUtils.formatName(entry.getPlayerName().strip()),
+                                    ComponentUtils.formatChat(entry.getChat().strip())
+                            );
+                            List<String> rawCols = List.of(
+                                    ComponentUtils.formatTimeStringRaw(entry.getTime()),
+                                    entry.getPlayerName().strip(),
+                                    entry.getUuid().toString(),
+                                    entry.getChat().strip()
+                            );
+                            ColumnComponent chatComponent = new ColumnComponent(this, cols, rawCols, chatWidths);
+                            chatComponent.addCopyItem(0, "Copy Time");
+                            chatComponent.addCopyItem(1, "Copy Player Name");
+                            chatComponent.addCopyItem(2, "Copy UUID");
+                            chatComponent.addCopyItem(3, "Copy Chat Message");
+                            chatComponent.addTargetItem(2, "View UUID");
+                            chatComponent.addTargetItem(1, "View Name");
+                            chats.add(chatComponent);
                         }
-                    });
-                }, () -> {
-                    uiTasks.add(() -> chatState = LoadState.LOADED_NO_MORE);
-                }))
+                        currentChatsPage++;
+                        chatState = LoadState.LOADED_MORE_AVAILABLE;
+                    }
+                }), () -> uiTasks.add(() -> chatState = LoadState.LOADED_NO_MORE)))
                 .exceptionally(ex -> {
                     ex.printStackTrace();
                     uiTasks.add(() -> chatState = LoadState.NOT_LOADED);
@@ -305,48 +300,44 @@ public class UserInfoWindow extends ResizeableWindow {
 
         CompletableFuture
                 .supplyAsync(() -> KybesUtils.getInstance().getVcApi().getDeaths(target, currentDeathsPage))
-                .thenAccept(optionalResponse -> optionalResponse.ifPresentOrElse(deathResponse -> {
-                    uiTasks.add(() -> {
-                        if (deathResponse.getDeaths().isEmpty()) {
-                            deathState = LoadState.LOADED_NO_MORE;
-                        } else {
-                            for (DeathEntry entry : deathResponse.getDeaths()) {
-                                List<Component> cols = List.of(
-                                        ComponentUtils.formatTime(entry.getTime()),
-                                        ComponentUtils.recolorFriends(entry.getDeathMessage().strip())
-                                );
-                                List<String> rawCols = List.of(
-                                        ComponentUtils.formatTimeStringRaw(entry.getTime()),
-                                        entry.getDeathMessage().strip(),
-                                        entry.getVictimPlayerName() == null ? "" : entry.getVictimPlayerName().strip(),
-                                        entry.getVictimPlayerUuid() == null ? "" : entry.getVictimPlayerUuid().strip(),
-                                        entry.getKillerPlayerName() == null ? "" : entry.getKillerPlayerName().strip(),
-                                        entry.getKillerPlayerUuid() == null ? "" : entry.getKillerPlayerUuid().strip(),
-                                        entry.getWeaponName() == null ? "" : entry.getWeaponName().strip(),
-                                        entry.getKillerMob() == null ? "" : entry.getKillerMob().strip()
-                                );
-                                ColumnComponent deathComponent = new ColumnComponent(this, cols, rawCols, deathWidths);
-                                deathComponent.addCopyItem(0, "Copy Time");
-                                deathComponent.addCopyItem(1, "Copy Death Message");
-                                deathComponent.addCopyItem(2, "Copy Victim Name");
-                                deathComponent.addCopyItem(3, "Copy Victim UUID");
-                                deathComponent.addCopyItem(4, "Copy Killer Name");
-                                deathComponent.addCopyItem(5, "Copy Killer UUID");
-                                deathComponent.addCopyItem(6, "Copy Weapon Name");
-                                deathComponent.addCopyItem(7, "Copy Killer Mob");
-                                deathComponent.addTargetItem(2, "View Victim Name");
-                                deathComponent.addTargetItem(3, "View Victim UUID");
-                                deathComponent.addTargetItem(4, "View Killer Name");
-                                deathComponent.addTargetItem(5, "View Killer UUID");
-                                deaths.add(deathComponent);
-                            }
-                            currentDeathsPage++;
-                            deathState = LoadState.LOADED_MORE_AVAILABLE;
+                .thenAccept(optionalResponse -> optionalResponse.ifPresentOrElse(deathResponse -> uiTasks.add(() -> {
+                    if (deathResponse.getDeaths().isEmpty()) {
+                        deathState = LoadState.LOADED_NO_MORE;
+                    } else {
+                        for (DeathEntry entry : deathResponse.getDeaths()) {
+                            List<Component> cols = List.of(
+                                    ComponentUtils.formatTime(entry.getTime()),
+                                    ComponentUtils.recolorFriends(entry.getDeathMessage().strip())
+                            );
+                            List<String> rawCols = List.of(
+                                    ComponentUtils.formatTimeStringRaw(entry.getTime()),
+                                    entry.getDeathMessage().strip(),
+                                    entry.getVictimPlayerName() == null ? "" : entry.getVictimPlayerName().strip(),
+                                    entry.getVictimPlayerUuid() == null ? "" : entry.getVictimPlayerUuid().strip(),
+                                    entry.getKillerPlayerName() == null ? "" : entry.getKillerPlayerName().strip(),
+                                    entry.getKillerPlayerUuid() == null ? "" : entry.getKillerPlayerUuid().strip(),
+                                    entry.getWeaponName() == null ? "" : entry.getWeaponName().strip(),
+                                    entry.getKillerMob() == null ? "" : entry.getKillerMob().strip()
+                            );
+                            ColumnComponent deathComponent = new ColumnComponent(this, cols, rawCols, deathWidths);
+                            deathComponent.addCopyItem(0, "Copy Time");
+                            deathComponent.addCopyItem(1, "Copy Death Message");
+                            deathComponent.addCopyItem(2, "Copy Victim Name");
+                            deathComponent.addCopyItem(3, "Copy Victim UUID");
+                            deathComponent.addCopyItem(4, "Copy Killer Name");
+                            deathComponent.addCopyItem(5, "Copy Killer UUID");
+                            deathComponent.addCopyItem(6, "Copy Weapon Name");
+                            deathComponent.addCopyItem(7, "Copy Killer Mob");
+                            deathComponent.addTargetItem(2, "View Victim Name");
+                            deathComponent.addTargetItem(3, "View Victim UUID");
+                            deathComponent.addTargetItem(4, "View Killer Name");
+                            deathComponent.addTargetItem(5, "View Killer UUID");
+                            deaths.add(deathComponent);
                         }
-                    });
-                }, () -> {
-                    uiTasks.add(() -> deathState = LoadState.LOADED_NO_MORE);
-                }))
+                        currentDeathsPage++;
+                        deathState = LoadState.LOADED_MORE_AVAILABLE;
+                    }
+                }), () -> uiTasks.add(() -> deathState = LoadState.LOADED_NO_MORE)))
                 .exceptionally(ex -> {
                     ex.printStackTrace();
                     uiTasks.add(() -> deathState = LoadState.NOT_LOADED);
@@ -362,48 +353,44 @@ public class UserInfoWindow extends ResizeableWindow {
 
         CompletableFuture
                 .supplyAsync(() -> KybesUtils.getInstance().getVcApi().getKills(target, currentKillsPage))
-                .thenAccept(optionalResponse -> optionalResponse.ifPresentOrElse(killResponse -> {
-                    uiTasks.add(() -> {
-                        if (killResponse.getKills().isEmpty()) {
-                            killState = LoadState.LOADED_NO_MORE;
-                        } else {
-                            for (KillEntry entry : killResponse.getKills()) {
-                                List<Component> cols = List.of(
-                                        ComponentUtils.formatTime(entry.getTime()),
-                                        ComponentUtils.recolorFriends(entry.getDeathMessage().strip())
-                                );
-                                List<String> rawCols = List.of(
-                                        ComponentUtils.formatTimeStringRaw(entry.getTime()),
-                                        entry.getDeathMessage().strip(),
-                                        entry.getVictimPlayerName() == null ? "" : entry.getVictimPlayerName().strip(),
-                                        entry.getVictimPlayerUuid() == null ? "" : entry.getVictimPlayerUuid().strip(),
-                                        entry.getKillerPlayerName() == null ? "" : entry.getKillerPlayerName().strip(),
-                                        entry.getKillerPlayerUuid() == null ? "" : entry.getKillerPlayerUuid().strip(),
-                                        entry.getWeaponName() == null ? "" : entry.getWeaponName().strip(),
-                                        entry.getKillerMob() == null ? "" : entry.getKillerMob().strip()
-                                );
-                                ColumnComponent killComponent = new ColumnComponent(this, cols, rawCols, killsWidths);
-                                killComponent.addCopyItem(0, "Copy Time");
-                                killComponent.addCopyItem(1, "Copy Death Message");
-                                killComponent.addCopyItem(2, "Copy Victim Name");
-                                killComponent.addCopyItem(3, "Copy Victim UUID");
-                                killComponent.addCopyItem(4, "Copy Killer Name");
-                                killComponent.addCopyItem(5, "Copy Killer UUID");
-                                killComponent.addCopyItem(6, "Copy Weapon Name");
-                                killComponent.addCopyItem(7, "Copy Killer Mob");
-                                killComponent.addTargetItem(2, "View Victim Name");
-                                killComponent.addTargetItem(3, "View Victim UUID");
-                                killComponent.addTargetItem(4, "View Killer Name");
-                                killComponent.addTargetItem(5, "View Killer UUID");
-                                kills.add(killComponent);
-                            }
-                            currentKillsPage++;
-                            killState = LoadState.LOADED_MORE_AVAILABLE;
+                .thenAccept(optionalResponse -> optionalResponse.ifPresentOrElse(killResponse -> uiTasks.add(() -> {
+                    if (killResponse.getKills().isEmpty()) {
+                        killState = LoadState.LOADED_NO_MORE;
+                    } else {
+                        for (KillEntry entry : killResponse.getKills()) {
+                            List<Component> cols = List.of(
+                                    ComponentUtils.formatTime(entry.getTime()),
+                                    ComponentUtils.recolorFriends(entry.getDeathMessage().strip())
+                            );
+                            List<String> rawCols = List.of(
+                                    ComponentUtils.formatTimeStringRaw(entry.getTime()),
+                                    entry.getDeathMessage().strip(),
+                                    entry.getVictimPlayerName() == null ? "" : entry.getVictimPlayerName().strip(),
+                                    entry.getVictimPlayerUuid() == null ? "" : entry.getVictimPlayerUuid().strip(),
+                                    entry.getKillerPlayerName() == null ? "" : entry.getKillerPlayerName().strip(),
+                                    entry.getKillerPlayerUuid() == null ? "" : entry.getKillerPlayerUuid().strip(),
+                                    entry.getWeaponName() == null ? "" : entry.getWeaponName().strip(),
+                                    entry.getKillerMob() == null ? "" : entry.getKillerMob().strip()
+                            );
+                            ColumnComponent killComponent = new ColumnComponent(this, cols, rawCols, killsWidths);
+                            killComponent.addCopyItem(0, "Copy Time");
+                            killComponent.addCopyItem(1, "Copy Death Message");
+                            killComponent.addCopyItem(2, "Copy Victim Name");
+                            killComponent.addCopyItem(3, "Copy Victim UUID");
+                            killComponent.addCopyItem(4, "Copy Killer Name");
+                            killComponent.addCopyItem(5, "Copy Killer UUID");
+                            killComponent.addCopyItem(6, "Copy Weapon Name");
+                            killComponent.addCopyItem(7, "Copy Killer Mob");
+                            killComponent.addTargetItem(2, "View Victim Name");
+                            killComponent.addTargetItem(3, "View Victim UUID");
+                            killComponent.addTargetItem(4, "View Killer Name");
+                            killComponent.addTargetItem(5, "View Killer UUID");
+                            kills.add(killComponent);
                         }
-                    });
-                }, () -> {
-                    uiTasks.add(() -> killState = LoadState.LOADED_NO_MORE);
-                }))
+                        currentKillsPage++;
+                        killState = LoadState.LOADED_MORE_AVAILABLE;
+                    }
+                }), () -> uiTasks.add(() -> killState = LoadState.LOADED_NO_MORE)))
                 .exceptionally(ex -> {
                     ex.printStackTrace();
                     uiTasks.add(() -> killState = LoadState.NOT_LOADED);
@@ -419,36 +406,32 @@ public class UserInfoWindow extends ResizeableWindow {
 
         CompletableFuture
                 .supplyAsync(() -> KybesUtils.getInstance().getVcApi().getConnections(target, currentConnectionsPage))
-                .thenAccept(optionalResponse -> optionalResponse.ifPresentOrElse(connectionResponse -> {
-                    uiTasks.add(() -> {
-                        if (connectionResponse.getConnections().isEmpty()) {
-                            connectionState = LoadState.LOADED_NO_MORE;
-                        } else {
-                            for (ConnectionEntry entry : connectionResponse.getConnections()) {
-                                ChatFormatting color = entry.getConnection().toString().equalsIgnoreCase("JOIN")
-                                        ? ChatFormatting.GREEN
-                                        : ChatFormatting.RED;
+                .thenAccept(optionalResponse -> optionalResponse.ifPresentOrElse(connectionResponse -> uiTasks.add(() -> {
+                    if (connectionResponse.getConnections().isEmpty()) {
+                        connectionState = LoadState.LOADED_NO_MORE;
+                    } else {
+                        for (ConnectionEntry entry : connectionResponse.getConnections()) {
+                            ChatFormatting color = entry.getConnection().toString().equalsIgnoreCase("JOIN")
+                                    ? ChatFormatting.GREEN
+                                    : ChatFormatting.RED;
 
-                                List<Component> cols = List.of(
-                                        ComponentUtils.formatTime(entry.getTime()),
-                                        Component.literal(entry.getConnection().toString()).withStyle(color)
-                                );
-                                List<String> rawCols = List.of(
-                                        ComponentUtils.formatTimeStringRaw(entry.getTime()),
-                                        entry.getConnection().toString()
-                                );
-                                ColumnComponent connectionComponent = new ColumnComponent(this, cols, rawCols, connectionWidths);
-                                connectionComponent.addCopyItem(0, "Copy Time");
-                                connectionComponent.addCopyItem(1, "Copy Connection Type");
-                                connections.add(connectionComponent);
-                            }
-                            currentConnectionsPage++;
-                            connectionState = LoadState.LOADED_MORE_AVAILABLE;
+                            List<Component> cols = List.of(
+                                    ComponentUtils.formatTime(entry.getTime()),
+                                    Component.literal(entry.getConnection().toString()).withStyle(color)
+                            );
+                            List<String> rawCols = List.of(
+                                    ComponentUtils.formatTimeStringRaw(entry.getTime()),
+                                    entry.getConnection().toString()
+                            );
+                            ColumnComponent connectionComponent = new ColumnComponent(this, cols, rawCols, connectionWidths);
+                            connectionComponent.addCopyItem(0, "Copy Time");
+                            connectionComponent.addCopyItem(1, "Copy Connection Type");
+                            connections.add(connectionComponent);
                         }
-                    });
-                }, () -> {
-                    uiTasks.add(() -> connectionState = LoadState.LOADED_NO_MORE);
-                }))
+                        currentConnectionsPage++;
+                        connectionState = LoadState.LOADED_MORE_AVAILABLE;
+                    }
+                }), () -> uiTasks.add(() -> connectionState = LoadState.LOADED_NO_MORE)))
                 .exceptionally(ex -> {
                     ex.printStackTrace();
                     uiTasks.add(() -> connectionState = LoadState.NOT_LOADED);
