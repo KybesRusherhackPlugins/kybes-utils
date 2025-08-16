@@ -44,6 +44,9 @@
 **Rocket 3**
 : Automatically crafts flight duration 3 rockets
 
+**FriendOnlyChat**
+: Only see messages from friends
+
 ## Commands
 
 **crypto-chat**

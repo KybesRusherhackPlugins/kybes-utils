@@ -48,6 +48,7 @@ public class KybesUtils extends Plugin {
         RusherHackAPI.getModuleManager().registerFeature(new ChatCopyModule());
         RusherHackAPI.getModuleManager().registerFeature(new IRLTimeModule());
         RusherHackAPI.getModuleManager().registerFeature(new AmbientLightModule());
+        RusherHackAPI.getModuleManager().registerFeature(new FriendOnlyChatModule());
 
         RusherHackAPI.getCommandManager().registerFeature(new DeathMessageParserCommand());
         RusherHackAPI.getCommandManager().registerFeature(new CryptoChatCommand());
