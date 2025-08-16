@@ -4,8 +4,9 @@ import de.kybe.KybesUtils.utils.*;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.protocol.game.ClientboundSystemChatPacket;
 import org.rusherhack.client.api.events.client.EventUpdate;
-import org.rusherhack.client.api.events.client.chat.EventAddChat;
+import org.rusherhack.client.api.events.network.EventPacket;
 import org.rusherhack.client.api.feature.module.ModuleCategory;
 import org.rusherhack.client.api.feature.module.ToggleableModule;
 import org.rusherhack.client.api.utils.ChatUtils;
@@ -117,10 +118,11 @@ public class CryptoChatModule extends ToggleableModule {
 
     @Subscribe(priority = -1001)
     @SuppressWarnings("unused")
-    public void onPacket(EventAddChat event) {
+    public void onPacket(EventPacket.Receive event) {
         if (mc.player == null) return;
+        if (!(event.getPacket() instanceof ClientboundSystemChatPacket pkt)) return;
 
-        String msg = event.getChatComponent().getString();
+        String msg = pkt.content().getString();
         String playerName = mc.player.getGameProfile().getName();
 
         if (debug.getValue()) log("Received chat packet: " + msg);
