@@ -13,10 +13,7 @@
     "IMixinClientPacketListener",
     "IMixinMinecraft",
     "LevelRendererMixin",
-    "WingsLayerMixin"
-  ],
-  "mixins": [
-    "ClientLevelData",
-    "IMixinClientboundSetTimePacket"
+    "WingsLayerMixin",
+    "ClientLevelData"
   ]
 }
