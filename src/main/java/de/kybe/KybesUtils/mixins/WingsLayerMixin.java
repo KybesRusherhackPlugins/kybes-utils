@@ -17,21 +17,17 @@ public abstract class WingsLayerMixin {
             at = @At(value = "FIELD", target = "Lnet/minecraft/client/renderer/entity/state/HumanoidRenderState;isBaby:Z", opcode = Opcodes.GETFIELD)
     )
     private boolean render$WrapOperation(HumanoidRenderState instance, Operation<Boolean> original) {
-        if (BabyElytraModule.INSTANCE != null && BabyElytraModule.INSTANCE.isToggled()) {
-            if (instance instanceof PlayerRenderState ps) {
-                String playerName = ps.name;
+        if (BabyElytraModule.INSTANCE == null || !BabyElytraModule.INSTANCE.isToggled()) return original.call(instance);
+        if (!(instance instanceof PlayerRenderState ps)) return original.call(instance);
+        String playerName = ps.name;
 
-                if (BabyElytraModule.INSTANCE.allPlayers.getValue()) {
-                    return true;
-                } else {
-                    String[] players = BabyElytraModule.INSTANCE.players.getValue().split(",");
-                    for (String allowedName : players) {
-                        if (allowedName.trim().equalsIgnoreCase(playerName)) {
-                            return true;
-                        }
-                    }
-                }
-            }
+        if (BabyElytraModule.INSTANCE.allPlayers.getValue()) {
+            return true;
+        }
+
+        String[] players = BabyElytraModule.INSTANCE.players.getValue().split(",");
+        for (String allowedName : players) {
+            if (allowedName.trim().equalsIgnoreCase(playerName)) return true;
         }
 
         return original.call(instance);

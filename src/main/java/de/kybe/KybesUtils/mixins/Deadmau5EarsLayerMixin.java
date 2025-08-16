@@ -18,16 +18,12 @@ public abstract class Deadmau5EarsLayerMixin {
 
         Deadmau5Module module = Deadmau5Module.INSTANCE;
 
-        if (module != null && module.isToggled()) {
-            if (module.allPlayers.getValue()) {
-                return true;
-            }
+        if (module == null || !module.isToggled()) return self.equals(other);
 
-            for (String allowed : module.players.getValue().split(",")) {
-                if (allowed.trim().equalsIgnoreCase(name)) {
-                    return true;
-                }
-            }
+        if (module.allPlayers.getValue()) return true;
+
+        for (String allowed : module.players.getValue().split(",")) {
+            if (allowed.trim().equalsIgnoreCase(name)) return true;
         }
 
         return self.equals(other);

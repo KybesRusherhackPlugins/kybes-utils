@@ -96,8 +96,7 @@ public class CryptoChatModule extends ToggleableModule {
         sendQueue.add(item);
 
         if (debug.getValue()) {
-            log("Queued message with " + item.chunks.size() + " chunks. Type: " + type +
-                    ", Target: " + target + ", Encrypted: " + encrypted);
+            log("Queued message with " + item.chunks.size() + " chunks. Type: " + type + ", Target: " + target + ", Encrypted: " + encrypted);
         }
     }
 

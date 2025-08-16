@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import static org.rusherhack.client.api.Globals.mc;
 
 @Mixin(ChatScreen.class)
-public class ChatScreenMixin {
+public abstract class ChatScreenMixin {
     @Inject(method = "mouseClicked", at = @At("HEAD"), cancellable = true)
     private void mouseClicked$Head(double mouseX, double mouseY, int button, CallbackInfoReturnable<Boolean> cir) {
         if (button != GLFW.GLFW_MOUSE_BUTTON_2 || !ChatCopyModule.INSTANCE.isToggled()) return;
