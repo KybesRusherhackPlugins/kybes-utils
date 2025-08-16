@@ -10,7 +10,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(FramerateLimitTracker.class)
 public abstract class FramerateLimitTrackerMixin {
-    @Shadow private int framerateLimit;
+    @Shadow
+    private int framerateLimit;
 
     @Inject(method = "getFramerateLimit", at = @At("HEAD"), cancellable = true)
     private void getFramerateLimit$Head(CallbackInfoReturnable<Integer> cir) {

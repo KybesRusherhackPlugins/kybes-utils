@@ -15,7 +15,7 @@ public class FogParametersModule extends ToggleableModule {
     public final NumberSetting<Float> start = new NumberSetting<>("Start", 1000f, 0f, 1000f);
     public final NumberSetting<Float> end = new NumberSetting<>("End", 0f, 0f, 1000f);
     public final EnumSetting<FogShape> fogShape = new EnumSetting<>("FogShape", FogShape.SPHERE);
-    public final ColorSetting color = new ColorSetting("Color", new Color(0,0,0,0));
+    public final ColorSetting color = new ColorSetting("Color", new Color(0, 0, 0, 0));
 
 
     public FogParametersModule() {

@@ -29,10 +29,10 @@ public abstract class ChatScreenMixin {
         GuiMessage.Line line = iMixinChatComponent.kybe$getTrimmedMessages().get(i);
 
         GuiMessage wholeMessage = iMixinChatComponent.kybe$getAllMessages()
-            .stream()
-            .filter(msg -> msg.addedTime() == line.addedTime())
-            .findFirst()
-            .orElse(null);
+                .stream()
+                .filter(msg -> msg.addedTime() == line.addedTime())
+                .findFirst()
+                .orElse(null);
 
         if (wholeMessage != null) {
             String text = wholeMessage.content().getString();

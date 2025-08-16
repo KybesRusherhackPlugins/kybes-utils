@@ -3,11 +3,6 @@ package de.kybe.KybesUtils.VcAPI.model;
 import java.time.OffsetDateTime;
 
 public class ConnectionEntry {
-    public enum ConnectionType {
-        JOIN,
-        LEAVE
-    }
-
     OffsetDateTime time;
     ConnectionType connection;
 
@@ -17,5 +12,10 @@ public class ConnectionEntry {
 
     public ConnectionType getConnection() {
         return connection;
+    }
+
+    public enum ConnectionType {
+        JOIN,
+        LEAVE
     }
 }

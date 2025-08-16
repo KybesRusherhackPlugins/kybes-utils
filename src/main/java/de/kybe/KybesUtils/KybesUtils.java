@@ -16,16 +16,16 @@ import static org.rusherhack.client.api.Globals.mc;
 public class KybesUtils extends Plugin {
     private static KybesUtils INSTANCE;
     private final VcApi vcApi = new VcApi(getLogger(), mc.getVersionType());
-    public VcApi getVcApi() {
-        return vcApi;
-    }
+    @SuppressWarnings("FieldCanBeLocal")
+    private final boolean TESTING = false;
 
     public static KybesUtils getInstance() {
         return INSTANCE;
     }
 
-    @SuppressWarnings("FieldCanBeLocal")
-    private final boolean TESTING = false;
+    public VcApi getVcApi() {
+        return vcApi;
+    }
 
     @Override
     public void onLoad() {

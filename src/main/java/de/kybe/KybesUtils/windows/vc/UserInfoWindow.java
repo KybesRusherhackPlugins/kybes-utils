@@ -17,7 +17,9 @@ import org.rusherhack.client.api.ui.window.content.WindowContent;
 import org.rusherhack.client.api.ui.window.content.component.ButtonComponent;
 import org.rusherhack.client.api.ui.window.content.component.TextFieldComponent;
 import org.rusherhack.client.api.ui.window.context.ContextAction;
-import org.rusherhack.client.api.ui.window.view.*;
+import org.rusherhack.client.api.ui.window.view.ScrollableView;
+import org.rusherhack.client.api.ui.window.view.TabbedView;
+import org.rusherhack.client.api.ui.window.view.WindowView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,36 +45,22 @@ public class UserInfoWindow extends ResizeableWindow {
     private final SharedWidthTracker deathWidths = new SharedWidthTracker();
     private final SharedWidthTracker connectionWidths = new SharedWidthTracker();
     private final SharedWidthTracker killsWidths = new SharedWidthTracker();
-
+    private final ConcurrentLinkedQueue<Runnable> uiTasks = new ConcurrentLinkedQueue<>();
+    private final List<WindowContent> content = new ArrayList<>();
+    private final TabbedView tabbedView = new TabbedView(this, this.content);
+    private final List<String> targetHistory = new ArrayList<>();
+    private final TextFieldComponent targetName = new TextFieldComponent(this, 125);
+    ButtonComponent buttonComponent;
     private LoadState chatState = LoadState.NOT_LOADED;
     private LoadState deathState = LoadState.NOT_LOADED;
     private LoadState connectionState = LoadState.NOT_LOADED;
     private LoadState killState = LoadState.NOT_LOADED;
-
-    ButtonComponent buttonComponent;
-
     private int currentChatsPage = 0;
     private int currentDeathsPage = 0;
     private int currentConnectionsPage = 0;
     private int currentKillsPage = 0;
-
-    private final ConcurrentLinkedQueue<Runnable> uiTasks = new ConcurrentLinkedQueue<>();
-
-    private final List<WindowContent> content = new ArrayList<>();
-    private final TabbedView tabbedView = new TabbedView(this, this.content);
-
-    private final List<String> targetHistory = new ArrayList<>();
     private int historyIndex = -1;
-
-    private final TextFieldComponent targetName = new TextFieldComponent(this, 125);
     private String target = "";
-
-    public enum LoadState {
-        NOT_LOADED,
-        LOADING,
-        LOADED_MORE_AVAILABLE,
-        LOADED_NO_MORE
-    }
 
     public UserInfoWindow() {
         super("2b2t", 250, 400);
@@ -442,5 +430,12 @@ public class UserInfoWindow extends ResizeableWindow {
     @Override
     public WindowView getRootView() {
         return this.tabbedView;
+    }
+
+    public enum LoadState {
+        NOT_LOADED,
+        LOADING,
+        LOADED_MORE_AVAILABLE,
+        LOADED_NO_MORE
     }
 }

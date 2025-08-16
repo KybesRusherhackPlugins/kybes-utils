@@ -84,7 +84,8 @@ public class MockerModule extends ToggleableModule {
             return;
         }
 
-        if (debug.getValue()) ChatUtils.print("Parsed message from: " + data.name + " msg: " + data.message + " direct: " + data.direct);
+        if (debug.getValue())
+            ChatUtils.print("Parsed message from: " + data.name + " msg: " + data.message + " direct: " + data.direct);
 
         if (shouldIgnoreSender(data.name)) {
             if (debug.getValue()) ChatUtils.print("Ignored sender: " + data.name);

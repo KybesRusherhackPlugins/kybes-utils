@@ -16,6 +16,8 @@ public class ColumnComponent extends WindowContent {
     private final List<Component> columns;
     private final List<String> rawColumns;
     private final SharedWidthTracker widthTracker;
+    List<ItemReference> copyItems = new ArrayList<>();
+    List<ItemReference> targetItems = new ArrayList<>();
 
     public ColumnComponent(Window window, List<Component> columns, List<String> rawColumns, SharedWidthTracker widthTracker) {
         super(window);
@@ -50,9 +52,6 @@ public class ColumnComponent extends WindowContent {
         return this.getFontRenderer().getFontHeight();
     }
 
-    List<ItemReference> copyItems = new ArrayList<>();
-    List<ItemReference> targetItems = new ArrayList<>();
-
     @Override
     public List<ContextAction> getContextMenu() {
         final List<ContextAction> contextMenu = new ArrayList<>();
@@ -75,6 +74,26 @@ public class ColumnComponent extends WindowContent {
         targetItems.add(new ItemReference(index, name));
     }
 
+    @Override
+    public boolean mouseClicked(double mouseX, double mouseY, int button) {
+        return false;
+    }
+
+    @Override
+    public boolean charTyped(char character) {
+        return false;
+    }
+
+    @Override
+    public boolean keyTyped(int key, int scanCode, int modifiers) {
+        return false;
+    }
+
+    @Override
+    public boolean mouseScrolled(double mouseX, double mouseY, double delta) {
+        return false;
+    }
+
     public static class ItemReference {
         int index;
         String name;
@@ -84,9 +103,4 @@ public class ColumnComponent extends WindowContent {
             this.name = name;
         }
     }
-
-    @Override public boolean mouseClicked(double mouseX, double mouseY, int button) { return false; }
-    @Override public boolean charTyped(char character) { return false; }
-    @Override public boolean keyTyped(int key, int scanCode, int modifiers) { return false; }
-    @Override public boolean mouseScrolled(double mouseX, double mouseY, double delta) { return false; }
 }

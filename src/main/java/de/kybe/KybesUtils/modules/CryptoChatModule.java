@@ -22,24 +22,22 @@ public class CryptoChatModule extends ToggleableModule {
     public static CryptoChatModule INSTANCE;
 
     public final BooleanSetting useChatPrefix = new BooleanSetting("UseChatPrefix", true);
-    public final StringSetting chatPrefix = new StringSetting("ChatPrefix", "+");    private final StringSetting encryptKey = new StringSetting("EncryptKey", "rusherhack")
+    public final StringSetting chatPrefix = new StringSetting("ChatPrefix", "+");
+    public final BooleanSetting allChatMessages = new BooleanSetting("AllChatMessages", false);    private final StringSetting encryptKey = new StringSetting("EncryptKey", "rusherhack")
             .onChange(this::updateCryptoKeys);
-    public final BooleanSetting allChatMessages = new BooleanSetting("AllChatMessages", false);
     private final StringSetting chatRegex = new StringSetting("ChatRegex", "(Group 1 = name, 2 = msg)",
-            "^<([a-zA-Z0-9_]+)>\\s*>*\\s*(.+)$");    private final StringSetting decryptKeys = new StringSetting("DecryptKeys", "(comma separated)", "rusherhack")
-            .onChange(this::updateCryptoKeys);
+            "^<([a-zA-Z0-9_]+)>\\s*>*\\s*(.+)$");
     private final StringSetting msgRegex = new StringSetting("MessageRegex", "(Group 1 = name, 2 = msg)",
             "^([a-zA-Z0-9_]+) whispers: (.+)$");
     private final StringSetting outboundDirectMsgRegex = new StringSetting("OutboundDirectMsgRegex", "(Group 1 = target, 2 = msg)",
-            "^to ([a-zA-Z0-9_]+): (.+)$");
+            "^to ([a-zA-Z0-9_]+): (.+)$");    private final StringSetting decryptKeys = new StringSetting("DecryptKeys", "(comma separated)", "rusherhack")
+            .onChange(this::updateCryptoKeys);
     private final NumberSetting<Integer> maxChatLength = new NumberSetting<>("MaxChatLength", 50, 0, 255);
     private final NumberSetting<Integer> sendDelaySeconds = new NumberSetting<>("SendDelay", "in seconds", 5, 0, 255);
     private final BooleanSetting ignoreSelf = new BooleanSetting("IgnoreSelf", false);
     private final BooleanSetting debug = new BooleanSetting("Debug", false).setHidden(true);
-
     private final ChatCrypto crypto = new ChatCrypto();
     private final LinkedList<SendItem> sendQueue = new LinkedList<>();
-
     private int sendTimer = 0;
     private SendItem currentSending = null;
     private int currentChunkIndex = 0;
@@ -140,7 +138,8 @@ public class CryptoChatModule extends ToggleableModule {
                     chat.name().equals(playerName)) {
 
                 String expected = currentSending.chunks.get(currentChunkIndex);
-                if (debug.getValue()) log("Matching chunk[" + currentChunkIndex + "]: expected='" + expected + "', actual='" + chat.msg() + "'");
+                if (debug.getValue())
+                    log("Matching chunk[" + currentChunkIndex + "]: expected='" + expected + "', actual='" + chat.msg() + "'");
 
                 if (chat.msg().equals(expected)) {
                     currentChunkIndex++;
@@ -265,10 +264,14 @@ public class CryptoChatModule extends ToggleableModule {
     }
 
     public static class SendItem {
-        public enum Type { DIRECT, CHAT }
         public Type type;
         public String directTarget;
         public String fullText;
         public ArrayList<String> chunks = new ArrayList<>();
+        public enum Type {DIRECT, CHAT}
     }
+
+
+
+
 }

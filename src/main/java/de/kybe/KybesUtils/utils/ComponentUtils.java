@@ -66,9 +66,9 @@ public class ComponentUtils {
         if (RusherHackAPI.getRelationManager().isEnemy(name)) {
             nameComponent = Component.literal(name).withColor(enemiesColor.getValueRGB());
         } else if (RusherHackAPI.getRelationManager().isFriend(name)) {
-            nameComponent =  Component.literal(name).withColor(friendsColor.getValueRGB());
+            nameComponent = Component.literal(name).withColor(friendsColor.getValueRGB());
         } else {
-            nameComponent =  Component.literal(name).withStyle(ChatFormatting.GRAY);
+            nameComponent = Component.literal(name).withStyle(ChatFormatting.GRAY);
         }
 
         return prefix.append(nameComponent).append(suffix);
