@@ -4,8 +4,7 @@ import de.kybe.KybesUtils.utils.ChatMessage;
 import de.kybe.KybesUtils.utils.ChatMessageParser;
 import de.kybe.KybesUtils.utils.DirectMessage;
 import de.kybe.KybesUtils.utils.DirectMessageParser;
-import net.minecraft.network.protocol.game.ClientboundSystemChatPacket;
-import org.rusherhack.client.api.events.network.EventPacket;
+import org.rusherhack.client.api.events.client.chat.EventAddChat;
 import org.rusherhack.client.api.feature.module.ModuleCategory;
 import org.rusherhack.client.api.feature.module.ToggleableModule;
 import org.rusherhack.client.api.utils.ChatUtils;
@@ -60,23 +59,22 @@ public class MockerModule extends ToggleableModule {
 
     @Subscribe(stage = Stage.POST, priority = -1, ignoreCancelled = true)
     @SuppressWarnings("unused")
-    public void onPacketAfterAntispam(EventPacket.Receive event) {
+    public void onPacketAfterAntispam(EventAddChat event) {
         if (beforeAntispam.getValue()) return;
         inner(event);
     }
 
     @Subscribe(stage = Stage.PRE, priority = 1, ignoreCancelled = true)
     @SuppressWarnings("unused")
-    public void onPacketBeforeAntispam(EventPacket.Receive event) {
+    public void onPacketBeforeAntispam(EventAddChat event) {
         if (!beforeAntispam.getValue()) return;
         inner(event);
     }
 
-    public void inner(EventPacket.Receive event) {
+    public void inner(EventAddChat event) {
         if (mc.player == null || mc.getConnection() == null) return;
-        if (!(event.getPacket() instanceof ClientboundSystemChatPacket packet)) return;
 
-        String raw = packet.content().getString();
+        String raw = event.getChatComponent().getString();
         if (debug.getValue()) ChatUtils.print("Received raw: " + raw);
 
         MessageData data = parseMessage(raw);

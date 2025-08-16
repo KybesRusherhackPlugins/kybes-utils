@@ -1,7 +1,6 @@
 package de.kybe.KybesUtils.modules;
 
-import net.minecraft.network.protocol.game.ClientboundSystemChatPacket;
-import org.rusherhack.client.api.events.network.EventPacket;
+import org.rusherhack.client.api.events.client.chat.EventAddChat;
 import org.rusherhack.client.api.feature.module.ModuleCategory;
 import org.rusherhack.client.api.feature.module.ToggleableModule;
 import org.rusherhack.client.api.utils.ChatUtils;
@@ -54,25 +53,23 @@ public class CodeOverShillerModule extends ToggleableModule {
     }
 
     @Subscribe(stage = Stage.POST, priority = -1, ignoreCancelled = true)
-    @SuppressWarnings("unused")
-    public void onPacketAfterAntiSpam(EventPacket.Receive event) {
+    public void onChatMessageAddBeforeAntiSPam(EventAddChat event) {
         if (beforeAntispam.getValue()) return;
         inner(event);
     }
 
     @Subscribe(stage = Stage.PRE, priority = 1, ignoreCancelled = true)
     @SuppressWarnings("unused")
-    public void onPacketBeforeAntiSpam(EventPacket.Receive event) {
+    public void onPacketBeforeAntiSpam(EventAddChat event) {
         if (!beforeAntispam.getValue()) return;
         inner(event);
     }
 
 
-    public void inner(EventPacket.Receive event) {
+    public void inner(EventAddChat event) {
         if (mc.player == null || mc.getConnection() == null) return;
-        if (!(event.getPacket() instanceof ClientboundSystemChatPacket packet)) return;
 
-        String raw = packet.content().getString();
+        String raw = event.getChatComponent().getString();
 
         if (debug.getValue()) ChatUtils.print("raw string: " + raw);
 
