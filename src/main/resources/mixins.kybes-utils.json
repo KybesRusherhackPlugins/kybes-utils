@@ -13,5 +13,9 @@
     "IMixinMinecraft",
     "LevelRendererMixin",
     "WingsLayerMixin"
+  ],
+  "mixins": [
+    "ClientLevelData",
+    "IMixinClientboundSetTimePacket"
   ]
 }

@@ -46,6 +46,7 @@ public class KybesUtils extends Plugin {
         RusherHackAPI.getModuleManager().registerFeature(new DontLimitMyFuckingFpsModule());
         RusherHackAPI.getModuleManager().registerFeature(new BannerClonerModule());
         RusherHackAPI.getModuleManager().registerFeature(new ChatCopyModule());
+        RusherHackAPI.getModuleManager().registerFeature(new IRLTimeModule());
 
         RusherHackAPI.getCommandManager().registerFeature(new DeathMessageParserCommand());
         RusherHackAPI.getCommandManager().registerFeature(new CryptoChatCommand());
@@ -58,5 +59,4 @@ public class KybesUtils extends Plugin {
     @Override
     public void onUnload() {
     }
-
 }
