@@ -4,6 +4,8 @@
   "package": "de.kybe.KybesUtils.mixins",
   "compatibilityLevel": "JAVA_17",
   "client": [
+    "IMixinChatComponent",
+    "ChatScreenMixin",
     "ClientPacketListenerMixin",
     "Deadmau5EarsLayerMixin",
     "FramerateLimitTrackerMixin",

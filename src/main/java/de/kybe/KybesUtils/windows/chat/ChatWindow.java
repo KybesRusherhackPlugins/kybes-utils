@@ -9,7 +9,6 @@ import org.rusherhack.client.api.ui.window.content.WindowContent;
 import org.rusherhack.client.api.ui.window.content.component.ButtonComponent;
 import org.rusherhack.client.api.ui.window.content.component.TextFieldComponent;
 import org.rusherhack.client.api.ui.window.view.RichTextView;
-import org.rusherhack.client.api.ui.window.view.SimpleView;
 import org.rusherhack.client.api.ui.window.view.TabbedView;
 import org.rusherhack.client.api.ui.window.view.WindowView;
 import org.rusherhack.core.event.subscribe.Subscribe;
