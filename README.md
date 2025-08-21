@@ -47,6 +47,9 @@
 **FriendOnlyChat**
 : Only see messages from friends
 
+**ClickableChatLinks**
+: Allows you to click on chat links to open them
+
 ## Commands
 
 **crypto-chat**
