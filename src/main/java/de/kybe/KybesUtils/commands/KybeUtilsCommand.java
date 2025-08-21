@@ -14,12 +14,24 @@ public class KybeUtilsCommand extends Command {
     @CommandExecutor(subCommand = "demo")
     @CommandExecutor.Argument({"value"})
     @SuppressWarnings("unused")
-    private String echo(boolean value) {
+    private String demo(boolean value) {
         ((IMixinMinecraft) mc).kybe$setDemo(value);
         if (mc.isDemo()) {
             return "Set Minecraft to demo mode.";
         } else {
             return "Set Minecraft to normal mode.";
+        }
+    }
+
+    @CommandExecutor(subCommand = "allowsMultiplayer")
+    @CommandExecutor.Argument({"value"})
+    @SuppressWarnings("unused")
+    private String allowsMultiplayer(boolean value) {
+        ((IMixinMinecraft) mc).kybe$setAllowsMultiplayer(value);
+        if (((IMixinMinecraft) mc).kybe$allowsMultiplayer()) {
+            return "Set Minecraft to allow multiplayer.";
+        } else {
+            return "Set Minecraft to disallow multiplayer.";
         }
     }
 }

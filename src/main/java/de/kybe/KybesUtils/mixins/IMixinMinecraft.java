@@ -10,4 +10,11 @@ public interface IMixinMinecraft {
     @Accessor("demo")
     @Mutable
     void kybe$setDemo(boolean demo);
+
+    @Accessor("allowsMultiplayer")
+    @Mutable
+    void kybe$setAllowsMultiplayer(boolean allowsMultiplayer);
+
+    @Accessor("allowsMultiplayer")
+    boolean kybe$allowsMultiplayer();
 }
