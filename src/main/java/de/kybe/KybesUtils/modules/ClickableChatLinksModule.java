@@ -24,28 +24,34 @@ public class ClickableChatLinksModule extends ToggleableModule {
     @Subscribe
     public void onChatAdd(EventAddChat event) {
         Component original = event.getChatComponent();
-        String text = original.getString();
-
-        Matcher matcher = URL_PATTERN.matcher(text);
         MutableComponent result = Component.empty();
-        int lastEnd = 0;
 
-        while (matcher.find()) {
-            if (matcher.start() > lastEnd) {
-                result.append(Component.literal(text.substring(lastEnd, matcher.start())));
+        for (Component part : original.toFlatList()) {
+            String text = part.getString();
+            Matcher matcher = URL_PATTERN.matcher(text);
+            int lastEnd = 0;
+
+            while (matcher.find()) {
+                if (matcher.start() > lastEnd) {
+                    result.append(Component.literal(
+                            text.substring(lastEnd, matcher.start())
+                    ).setStyle(part.getStyle()));
+                }
+
+                String url = matcher.group(1);
+
+                Style linkStyle = part.getStyle()
+                        .withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, url));
+
+                result.append(Component.literal(url).setStyle(linkStyle));
+                lastEnd = matcher.end();
             }
 
-            String url = matcher.group(1);
-
-            result.append(
-                    Component.literal(url).withStyle(Style.EMPTY.withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, url)))
-            );
-
-            lastEnd = matcher.end();
-        }
-
-        if (lastEnd < text.length()) {
-            result.append(Component.literal(text.substring(lastEnd)));
+            if (lastEnd < text.length()) {
+                result.append(Component.literal(
+                        text.substring(lastEnd)
+                ).setStyle(part.getStyle()));
+            }
         }
 
         event.setChatComponent(result);
