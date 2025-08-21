@@ -4,6 +4,7 @@ import de.kybe.KybesUtils.VcAPI.VcApi;
 import de.kybe.KybesUtils.commands.CryptoChatCommand;
 import de.kybe.KybesUtils.commands.DeathMessageParserCommand;
 import de.kybe.KybesUtils.commands.KybeUtilsCommand;
+import de.kybe.KybesUtils.hud.SignHoverHUD;
 import de.kybe.KybesUtils.modules.*;
 import de.kybe.KybesUtils.windows.chat.ChatWindow;
 import de.kybe.KybesUtils.windows.vc.UserInfoWindow;
@@ -16,8 +17,6 @@ import static org.rusherhack.client.api.Globals.mc;
 public class KybesUtils extends Plugin {
     private static KybesUtils INSTANCE;
     private final VcApi vcApi = new VcApi(getLogger(), mc.getVersionType());
-    @SuppressWarnings("FieldCanBeLocal")
-    private final boolean TESTING = false;
 
     public static KybesUtils getInstance() {
         return INSTANCE;
@@ -30,9 +29,6 @@ public class KybesUtils extends Plugin {
     @Override
     public void onLoad() {
         INSTANCE = this;
-        if (TESTING) {
-            return;
-        }
 
         RusherHackAPI.getModuleManager().registerFeature(new MockerModule());
         RusherHackAPI.getModuleManager().registerFeature(new DeathMockerModule());
@@ -57,6 +53,8 @@ public class KybesUtils extends Plugin {
 
         RusherHackAPI.getWindowManager().registerFeature(new UserInfoWindow());
         RusherHackAPI.getWindowManager().registerFeature(new ChatWindow());
+
+        RusherHackAPI.getHudManager().registerFeature(new SignHoverHUD());
     }
 
     @Override

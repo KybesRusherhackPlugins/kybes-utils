@@ -68,3 +68,7 @@
 
 **Chat**
 : Allows you to see chat messages via a window and also send them
+
+## HUD
+**SignHover**
+: Allows you to see the text of signs when hovering over them
