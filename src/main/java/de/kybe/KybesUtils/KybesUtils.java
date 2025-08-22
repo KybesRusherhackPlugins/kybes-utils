@@ -4,6 +4,7 @@ import de.kybe.KybesUtils.VcAPI.VcApi;
 import de.kybe.KybesUtils.commands.CryptoChatCommand;
 import de.kybe.KybesUtils.commands.DeathMessageParserCommand;
 import de.kybe.KybesUtils.commands.KybeUtilsCommand;
+import de.kybe.KybesUtils.hud.PlayerNameV2HUD;
 import de.kybe.KybesUtils.hud.SignHoverHUD;
 import de.kybe.KybesUtils.modules.*;
 import de.kybe.KybesUtils.windows.chat.ChatWindow;
@@ -26,9 +27,16 @@ public class KybesUtils extends Plugin {
         return vcApi;
     }
 
+    public static boolean TESTING = false;
+
     @Override
     public void onLoad() {
         INSTANCE = this;
+
+        if (TESTING) {
+            RusherHackAPI.getModuleManager().registerFeature(new UnnaturalRotationModule());
+            return;
+        }
 
         RusherHackAPI.getModuleManager().registerFeature(new MockerModule());
         RusherHackAPI.getModuleManager().registerFeature(new DeathMockerModule());
@@ -46,6 +54,7 @@ public class KybesUtils extends Plugin {
         RusherHackAPI.getModuleManager().registerFeature(new AmbientLightModule());
         RusherHackAPI.getModuleManager().registerFeature(new FriendOnlyChatModule());
         RusherHackAPI.getModuleManager().registerFeature(new ClickableChatLinksModule());
+        RusherHackAPI.getModuleManager().registerFeature(new UnnaturalRotationModule());
 
         RusherHackAPI.getCommandManager().registerFeature(new DeathMessageParserCommand());
         RusherHackAPI.getCommandManager().registerFeature(new CryptoChatCommand());
@@ -55,6 +64,7 @@ public class KybesUtils extends Plugin {
         RusherHackAPI.getWindowManager().registerFeature(new ChatWindow());
 
         RusherHackAPI.getHudManager().registerFeature(new SignHoverHUD());
+        RusherHackAPI.getHudManager().registerFeature(new PlayerNameV2HUD());
     }
 
     @Override
