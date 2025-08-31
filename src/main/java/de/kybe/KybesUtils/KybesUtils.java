@@ -29,7 +29,7 @@ public class KybesUtils extends Plugin {
     public void onLoad() {
         INSTANCE = this;
 
-        RusherHackAPI.getModuleManager().registerFeature(new NoFallElyModule());
+        RusherHackAPI.getModuleManager().registerFeature(new AutoElytraFallModule());
 
         if (TESTING) return;
 
@@ -60,7 +60,8 @@ public class KybesUtils extends Plugin {
         moduleManager.registerFeature(new UnnaturalRotationModule());
         moduleManager.registerFeature(new BellSpammerModule());
         moduleManager.registerFeature(new AntiIllegalDisconnectProxyModule());
-        RusherHackAPI.getModuleManager().registerFeature(new NoFallElyModule());
+        moduleManager.registerFeature(new NoFallElyModule());
+        moduleManager.registerFeature(new AutoElytraFallModule());
     }
 
     private void registerCommands() {

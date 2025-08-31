@@ -35,6 +35,9 @@ A collection of modules that help with various tasks in Minecraft.
 - AntiIllegalDisconnectProxy
 : Automatically cancels IllegalDisconnect when on a proxy
 
+- AutoElytraFall
+: Automatically deploys your Elytra when falling from a height.
+
 - BabyElytra
 : Allows you to enable the baby elytra variant for you or others
 
@@ -76,6 +79,9 @@ A collection of modules that help with various tasks in Minecraft.
 
 - Mocker
 : Mocks Players like \"\"HaLlO HoW Ar u\" | smth\"
+
+- NoFallEly
+: Stops fall damage by deploying elytra and rocketing
 
 - RandomSentence
 : Gets random sentences and says them ingame

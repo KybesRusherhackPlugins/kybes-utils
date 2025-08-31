@@ -35,7 +35,10 @@ public class NoFallElyModule extends ToggleableModule {
     }
 
     @Subscribe(stage = Stage.ON)
-    public void onUpdate(EventUpdate event) {
+    @SuppressWarnings("unused")
+    public void onUpdate(EventUpdate ignored) {
+        if (mc.player == null) return;
+
         if (!isPlayerReady()) return;
 
         Vec3 motion = mc.player.getDeltaMovement();
@@ -73,6 +76,8 @@ public class NoFallElyModule extends ToggleableModule {
     }
 
     private void handleLanding() {
+        if (mc.player == null) return;
+
         if (delay > 0) {
             delay--;
             return;
@@ -84,6 +89,8 @@ public class NoFallElyModule extends ToggleableModule {
     }
 
     private void handleChestRecovery() {
+        if (mc.player == null) return;
+
         if (delay > 0) {
             RusherHackAPI.getRotationManager().updateRotation(mc.player.getXRot(), ROTATION_LAND);
             delay--;
@@ -108,6 +115,8 @@ public class NoFallElyModule extends ToggleableModule {
 
 
     private void ensureElytraEquipped(double distanceToGround, Vec3 motion) {
+        if (mc.player == null) return;
+
         if (distanceToGround >= -motion.y * 8) return;
 
         ItemStack chestArmor = mc.player.getInventory().getArmor(2);
@@ -120,6 +129,8 @@ public class NoFallElyModule extends ToggleableModule {
 
 
     private void startFallFlyingAndRocket() {
+        if (mc.getConnection() == null || mc.player == null) return;
+
         RusherHackAPI.getRotationManager().updateRotation(mc.player.getXRot(), ROTATION_FLY);
 
         if (!mc.player.onGround() && !mc.player.isFallFlying()) {
@@ -143,6 +154,8 @@ public class NoFallElyModule extends ToggleableModule {
 
 
     private void swapArmor(int fromSlot) {
+        if (mc.gameMode == null || mc.player == null) return;
+
         if (fromSlot == -1) return;
         if (fromSlot - 36 > 9) return;
         mc.gameMode.handleInventoryMouseClick(mc.player.containerMenu.containerId, 6, fromSlot - 36, ClickType.SWAP, mc.player);
@@ -161,6 +174,8 @@ public class NoFallElyModule extends ToggleableModule {
     }
 
     private void useRocket() {
+        if (mc.player == null || mc.gameMode == null) return;
+
         int rocketSlot = InventoryUtils.findItem(Items.FIREWORK_ROCKET, true, false);
         if (rocketSlot == -1) return;
 
