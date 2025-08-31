@@ -4,7 +4,6 @@ MAIN_FILE="src/main/java/de/kybe/KybesUtils/KybesUtils.java"
 SRC_DIR="src/main/java"
 README="README.md"
 
-# Generate the list in the desired format with a newline after each description
 TMP_FILE=$(mktemp)
 
 grep -oP 'registerFeature\s*\(\s*new\s+\K\w+' "$MAIN_FILE" | sort -u | while read -r CLASS; do
@@ -21,7 +20,7 @@ grep -oP 'registerFeature\s*\(\s*new\s+\K\w+' "$MAIN_FILE" | sort -u | while rea
     fi
     echo "- $NAME"
     echo ": $DESC"
-    echo ""  # Add newline after each description
+    echo ""
 done > "$TMP_FILE"
 
 awk -v newfile="$TMP_FILE" '
@@ -29,8 +28,10 @@ BEGIN {insert=0; skip=0}
 /^---/ {
     if (insert==0) {
         print
+        print ""
         # Insert new content
         while ((getline line < newfile) > 0) print line
+        print "---"
         insert=1
         skip=1
         next
