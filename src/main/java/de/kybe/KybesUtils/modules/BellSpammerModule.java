@@ -22,8 +22,6 @@ public class BellSpammerModule extends ToggleableModule {
     private final NumberSetting<Integer> multi = new NumberSetting<>("Multi", 1, 1, 5);
     private final BooleanSetting swing = new BooleanSetting("Swing", true);
 
-    private int count = 0;
-
     public BellSpammerModule() {
         super("BellSpammer", ModuleCategory.MISC);
         this.registerSettings(maxPerTick, multi, swing);
@@ -38,7 +36,6 @@ public class BellSpammerModule extends ToggleableModule {
             if (perTickCount >= maxPerTick.getValue()) break;
             if (ringBell(pos)) {
                 perTickCount++;
-                count++;
             }
         }
     }

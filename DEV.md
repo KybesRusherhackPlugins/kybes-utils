@@ -1,1 +1,1 @@
-before pushing make sure to run ./dev.sh false
+before pushing make sure to run `./dev.sh false` and `./extract_modules.sh`
