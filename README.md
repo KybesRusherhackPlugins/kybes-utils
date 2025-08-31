@@ -1,5 +1,26 @@
 # Kybes Utils
 
+A collection of modules that help with various tasks in Minecraft.
+
+## FAQ
+
+- How do I install it?
+: [here's](https://github.com/RusherDevelopment/rusherhack-plugins/blob/main/README.md#installation) a great guide on how to install rusher plugins
+
+- How do I add features?
+: Make a PR and make sure to run `./dev.sh false` and `./extract_modules.sh` before pushing
+
+- How do I report bugs?
+: Make a Issue explaining the bug in detail
+
+- How do I update it?
+: Grap the latest release from the releases tab and replace the jar in your rusherhack plugins folder
+
+- Where can I get support?
+: Join https://kybe.xyz/dc
+
+## Modules
+
 ---
 
 - AmbientLight
