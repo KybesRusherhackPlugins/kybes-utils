@@ -35,7 +35,6 @@ public class KybesUtils extends Plugin {
         INSTANCE = this;
 
         if (TESTING) {
-            RusherHackAPI.getCommandManager().registerFeature(new StatDumpCommand());
             return;
         }
 
@@ -56,6 +55,8 @@ public class KybesUtils extends Plugin {
         RusherHackAPI.getModuleManager().registerFeature(new FriendOnlyChatModule());
         RusherHackAPI.getModuleManager().registerFeature(new ClickableChatLinksModule());
         RusherHackAPI.getModuleManager().registerFeature(new UnnaturalRotationModule());
+        RusherHackAPI.getModuleManager().registerFeature(new BellSpammerModule());
+        RusherHackAPI.getModuleManager().registerFeature(new AntiIllegalDisconnectProxyModule());
 
         RusherHackAPI.getCommandManager().registerFeature(new DeathMessageParserCommand());
         RusherHackAPI.getCommandManager().registerFeature(new CryptoChatCommand());
