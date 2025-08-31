@@ -19,7 +19,7 @@ public class RandomSentenceModule extends ToggleableModule {
     private long nextDelayMs = 0;
 
     public RandomSentenceModule() {
-        super("RandomSentence", ModuleCategory.CHAT);
+        super("RandomSentence", "Gets random sentences and says them ingame", ModuleCategory.CHAT);
         this.registerSettings(minDelaySeconds, maxDelaySeconds, randomWhisper);
     }
 

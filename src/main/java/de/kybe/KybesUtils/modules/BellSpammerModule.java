@@ -23,7 +23,7 @@ public class BellSpammerModule extends ToggleableModule {
     private final BooleanSetting swing = new BooleanSetting("Swing", true);
 
     public BellSpammerModule() {
-        super("BellSpammer", ModuleCategory.MISC);
+        super("BellSpammer", "Spams bells in your area", ModuleCategory.MISC);
         this.registerSettings(maxPerTick, multi, swing);
     }
 

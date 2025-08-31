@@ -14,7 +14,7 @@ public class FriendOnlyChatModule extends ToggleableModule {
             "^<([a-zA-Z0-9_]+)>\\s*>*\\s*(.+)$");
 
     public FriendOnlyChatModule() {
-        super("FriendOnlyChat", ModuleCategory.CHAT);
+        super("FriendOnlyChat", "Makes it so you only see friends in chat", ModuleCategory.CHAT);
 
         this.registerSettings(chatRegex);
     }

@@ -15,7 +15,7 @@ public class AmbientLightModule extends ToggleableModule {
     public EnumSetting<Mode> mode = new EnumSetting<>("Mode", "The mode of the ambient light effect", Mode.NETHER);
 
     public AmbientLightModule() {
-        super("AmbientLight", ModuleCategory.RENDER);
+        super("AmbientLight", "Allows you to switch between the nether and overworld light modes" ,ModuleCategory.RENDER);
 
         this.registerSettings(mode);
 

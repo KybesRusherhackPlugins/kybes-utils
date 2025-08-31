@@ -10,7 +10,7 @@ public class IRLTimeModule extends ToggleableModule {
 
 
     public IRLTimeModule() {
-        super("IRL Time", ModuleCategory.MISC);
+        super("IRL Time", "Sets your ingame time to irl time", ModuleCategory.MISC);
 
         INSTANCE = this;
     }

@@ -49,7 +49,7 @@ public class CodeOverShillerModule extends ToggleableModule {
 
 
     public CodeOverShillerModule() {
-        super("CodeOverShiller", ModuleCategory.CHAT);
+        super("CodeOverShiller", "Automatically shills your code if smbd else shills theres", ModuleCategory.CHAT);
         this.registerSettings(format, randomMessagePartLength, beforeAntispam, codeRegex, ignoreList, debug);
     }
 

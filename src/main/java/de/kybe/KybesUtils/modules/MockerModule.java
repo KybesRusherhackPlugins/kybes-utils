@@ -44,7 +44,7 @@ public class MockerModule extends ToggleableModule {
     private final Random random = new Random();
 
     public MockerModule() {
-        super("Mocker", ModuleCategory.CHAT);
+        super("Mocker", "Mocks Players like \"\"HaLlO HoW Ar u\" | smth\"",ModuleCategory.CHAT);
 
         NullSetting lists = new NullSetting("Comma-SeparatedLists");
         lists.addSubSettings(ignoreList, forceList, ignoreWords);

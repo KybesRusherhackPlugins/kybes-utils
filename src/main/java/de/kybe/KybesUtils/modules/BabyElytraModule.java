@@ -12,7 +12,7 @@ public class BabyElytraModule extends ToggleableModule {
     public final StringSetting players = new StringSetting("Players", "2kybe3");
 
     public BabyElytraModule() {
-        super("BabyElytra", ModuleCategory.MISC);
+        super("BabyElytra", "Allows you to enable the baby elytra variant for you or others", ModuleCategory.MISC);
 
         this.registerSettings(allPlayers, players);
 

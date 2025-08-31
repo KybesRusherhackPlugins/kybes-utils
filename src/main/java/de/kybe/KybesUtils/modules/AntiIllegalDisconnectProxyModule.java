@@ -8,7 +8,7 @@ import org.rusherhack.core.event.subscribe.Subscribe;
 
 public class AntiIllegalDisconnectProxyModule extends ToggleableModule {
     public AntiIllegalDisconnectProxyModule() {
-        super("AntiIllegalDisconnectProxy", ModuleCategory.MISC);
+        super("AntiIllegalDisconnectProxy", "Automatically cancels IllegalDisconnect when on a proxy", ModuleCategory.MISC);
     }
 
     @Subscribe

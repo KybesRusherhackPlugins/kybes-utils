@@ -41,7 +41,7 @@ public class DeathMockerModule extends ToggleableModule {
     private final Random random = new Random();
 
     public DeathMockerModule() {
-        super("DeathMocker", ModuleCategory.CHAT);
+        super("DeathMocker", "Allows you mock others if they die", ModuleCategory.CHAT);
         this.registerSettings(format, randomMessagePartLength, mode, ignoreList, beforeAntispam, debug);
     }
 

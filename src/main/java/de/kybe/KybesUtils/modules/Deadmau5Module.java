@@ -12,7 +12,7 @@ public class Deadmau5Module extends ToggleableModule {
     public final StringSetting players = new StringSetting("Players", "2kybe3");
 
     public Deadmau5Module() {
-        super("Deadmau5", ModuleCategory.MISC);
+        super("Deadmau5", "Allows you or others to have the Deadmau5 ears", ModuleCategory.MISC);
 
         this.registerSettings(allPlayers, players);
 

@@ -19,89 +19,110 @@ A collection of modules that help with various tasks in Minecraft.
 - Where can I get support?
 : Join https://kybe.xyz/dc
 
+---
+
+# Features
+
+---
+
 ## Modules
 
 ---
 
 - AmbientLight
-: no description
+: Allows you to switch between the nether and overworld light modes
 
 - AntiIllegalDisconnectProxy
-: no description
+: Automatically cancels IllegalDisconnect when on a proxy
 
 - BabyElytra
-: no description
+: Allows you to enable the baby elytra variant for you or others
 
 - BannerCloner
-: no description
+: Automatically dupes banners
 
 - BellSpammer
-: no description
+: Spams bells in your area
 
 - ChatCopy
 : Allows to right click a message to copy it
-
-- Chat
-: no description
 
 - ClickableChatLinks
 : Makes chat links clickable
 
 - CodeOverShiller
-: no description
-
-- crypto-chat
-: Uses the CryptoChat encryption system
+: Automatically shills your code if smbd else shills theres
 
 - CryptoChat
-: no description
+: Allows you to talk using encrypted chat
 
 - Deadmau5
-: no description
-
-- death-message-parser
-: uses the death message parser
+: Allows you or others to have the Deadmau5 ears
 
 - DeathMocker
-: no description
+: Allows you mock others if they die
 
 - DontLimitMyFuckingFps
-: no description
+: Disables the vanilla AFK fps limit
 
 - FogParameters
-: no description
+: Allows you to modify fog settings
 
 - FriendOnlyChat
-: no description
+: Makes it so you only see friends in chat
 
 - IRL Time
-: no description
-
-- kybes-utils
-: Kybe's Utils Command
+: Sets your ingame time to irl time
 
 - Mocker
-: no description
-
-- PlayerNameV2
-: no description
+: Mocks Players like \"\"HaLlO HoW Ar u\" | smth\"
 
 - RandomSentence
-: no description
+: Gets random sentences and says them ingame
 
 - Rocket3
 : Auto-crafts flight duration 3 rockets
 
-- SignHover
-: no description
+- UnnaturalRotation
+: Lets you know if blocks are rotated unusual
+
+---
+
+## Commands
+
+---
+
+- crypto-chat
+: Uses the CryptoChat encryption system
+
+- death-message-parser
+: uses the death message parser
+
+- kybes-utils
+: Kybe's Utils Command
 
 - stats-dump
 : Dumps player stats to termbin
 
-- UnnaturalRotation
-: Lets you know if blocks are rotated unusual
+---
 
-- 2b2t
-: no description
+## Windows
 
 ---
+
+- Chat
+
+- 2b2t
+
+---
+
+## HUDs
+
+---
+
+- PlayerNameV2
+
+- SignHover
+
+---
+

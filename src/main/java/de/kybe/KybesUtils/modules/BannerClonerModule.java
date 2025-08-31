@@ -21,7 +21,7 @@ public class BannerClonerModule extends ToggleableModule {
     int ticks = 0;
 
     public BannerClonerModule() {
-        super("BannerCloner", ModuleCategory.MISC);
+        super("BannerCloner",  "Automatically dupes banners", ModuleCategory.MISC);
 
         this.registerSettings(delay);
     }

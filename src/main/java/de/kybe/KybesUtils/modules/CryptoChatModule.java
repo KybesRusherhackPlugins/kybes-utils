@@ -43,7 +43,7 @@ public class CryptoChatModule extends ToggleableModule {
     private SendItem currentSending = null;
     private int currentChunkIndex = 0;
     public CryptoChatModule() {
-        super("CryptoChat", ModuleCategory.CHAT);
+        super("CryptoChat", "Allows you to talk using encrypted chat", ModuleCategory.CHAT);
         NullSetting regexes = new NullSetting("Regular Expressions");
         regexes.addSubSettings(chatRegex, msgRegex, outboundDirectMsgRegex);
         this.registerSettings(encryptKey, decryptKeys, regexes, maxChatLength, sendDelaySeconds, ignoreSelf, useChatPrefix, chatPrefix, allChatMessages, debug);

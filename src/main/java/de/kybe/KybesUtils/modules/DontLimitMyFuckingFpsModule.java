@@ -7,7 +7,7 @@ public class DontLimitMyFuckingFpsModule extends ToggleableModule {
     private static DontLimitMyFuckingFpsModule INSTANCE;
 
     public DontLimitMyFuckingFpsModule() {
-        super("DontLimitMyFuckingFps", ModuleCategory.MISC);
+        super("DontLimitMyFuckingFps", "Disables the vanilla AFK fps limit", ModuleCategory.MISC);
 
         INSTANCE = this;
     }

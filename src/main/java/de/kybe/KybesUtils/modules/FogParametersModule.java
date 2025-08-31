@@ -19,7 +19,7 @@ public class FogParametersModule extends ToggleableModule {
 
 
     public FogParametersModule() {
-        super("FogParameters", ModuleCategory.CHAT);
+        super("FogParameters", "Allows you to modify fog settings", ModuleCategory.CHAT);
 
         this.registerSettings(start, end, fogShape, color);
 
