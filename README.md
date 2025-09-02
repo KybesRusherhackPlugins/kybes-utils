@@ -47,6 +47,9 @@ A collection of modules that help with various tasks in Minecraft.
 - BellSpammer
 : Spams bells in your area
 
+- ChatAppendV2
+: Allows you to customize sending messages
+
 - ChatCopy
 : Allows to right click a message to copy it
 
