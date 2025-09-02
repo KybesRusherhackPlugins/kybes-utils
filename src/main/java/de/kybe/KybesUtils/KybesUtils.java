@@ -29,7 +29,7 @@ public class KybesUtils extends Plugin {
     public void onLoad() {
         INSTANCE = this;
 
-        RusherHackAPI.getModuleManager().registerFeature(new AutoElytraFallModule());
+        RusherHackAPI.getModuleManager().registerFeature(new NoFallElyModule());
 
         if (TESTING) return;
 

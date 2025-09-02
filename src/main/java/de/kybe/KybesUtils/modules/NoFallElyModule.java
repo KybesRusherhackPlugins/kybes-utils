@@ -37,12 +37,12 @@ public class NoFallElyModule extends ToggleableModule {
     @Subscribe(stage = Stage.ON)
     @SuppressWarnings("unused")
     public void onUpdate(EventUpdate ignored) {
-        if (mc.player == null) return;
-
-        if (!isPlayerReady()) return;
+        if (mc.player == null || mc.level == null || mc.gameMode == null || mc.getConnection() == null) return;
 
         Vec3 motion = mc.player.getDeltaMovement();
         double distanceToGround = mc.player.getY() - getHighestBlockYAtPlayer() - 1;
+
+        if (mc.player.onGround()) allowLand = false;
 
         if (allowLand) {
             handleLanding();
@@ -66,13 +66,9 @@ public class NoFallElyModule extends ToggleableModule {
         ensureElytraEquipped(distanceToGround, motion);
         ensureRocketInHotbar(distanceToGround, motion);
 
-        if (distanceToGround <= -motion.y * 4 && !mc.player.onGround()) {
+        if (distanceToGround <= -motion.y * 2 && !mc.player.onGround()) {
             startFallFlyingAndRocket();
         }
-    }
-
-    private boolean isPlayerReady() {
-        return mc.player != null && mc.level != null && mc.gameMode != null && mc.getConnection() != null;
     }
 
     private void handleLanding() {
@@ -108,7 +104,7 @@ public class NoFallElyModule extends ToggleableModule {
     }
 
     private void ensureRocketInHotbar(double distanceToGround, Vec3 motion) {
-        if (distanceToGround >= -motion.y * 12) return;
+        if (distanceToGround >= -motion.y * 3) return;
 
         getRocket();
     }
@@ -117,7 +113,7 @@ public class NoFallElyModule extends ToggleableModule {
     private void ensureElytraEquipped(double distanceToGround, Vec3 motion) {
         if (mc.player == null) return;
 
-        if (distanceToGround >= -motion.y * 8) return;
+        if (distanceToGround >= -motion.y * 3) return;
 
         ItemStack chestArmor = mc.player.getInventory().getArmor(2);
         if (chestArmor.getItem() != Items.ELYTRA) {
@@ -188,7 +184,7 @@ public class NoFallElyModule extends ToggleableModule {
             mc.gameMode.useItem(mc.player, InteractionHand.MAIN_HAND);
         }
         allowLand = true;
-        delay = 5;
+        delay = 1;
     }
 
     private int getHighestBlockYAtPlayer() {
