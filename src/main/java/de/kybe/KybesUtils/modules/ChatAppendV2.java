@@ -54,7 +54,6 @@ public class ChatAppendV2 extends ToggleableModule {
     public ChatAppendV2() {
         super("ChatAppendV2", "Allows you to customize sending messages", ModuleCategory.CHAT);
 
-
         prefixRandomSettings.addSubSettings(prefixRandomIncludeAlpha, prefixRandomIncludeNumeric, prefixRandomIncludeSpecial, prefixRandomLength);
         betweenRandomSettings.addSubSettings(betweenRandomIncludeAlpha, betweenRandomIncludeNumeric, betweenRandomIncludeSpecial, betweenRandomLength);
         postfixRandomSettings.addSubSettings(postfixRandomIncludeAlpha, postfixRandomIncludeNumeric, postfixRandomIncludeSpecial, postfixRandomLength);

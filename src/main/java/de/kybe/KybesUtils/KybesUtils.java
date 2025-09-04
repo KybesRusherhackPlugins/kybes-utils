@@ -29,9 +29,9 @@ public class KybesUtils extends Plugin {
     public void onLoad() {
         INSTANCE = this;
 
-        RusherHackAPI.getModuleManager().registerFeature(new ChatAppendV2());
-
-        if (TESTING) return;
+        if (TESTING) {
+            return;
+        }
 
         registerModules();
         registerCommands();
