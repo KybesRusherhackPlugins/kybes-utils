@@ -25,15 +25,15 @@ public class CryptoChatModule extends ToggleableModule {
     public final BooleanSetting useChatPrefix = new BooleanSetting("UseChatPrefix", true);
     public final StringSetting chatPrefix = new StringSetting("ChatPrefix", "+");
     public final BooleanSetting allChatMessages = new BooleanSetting("AllChatMessages", false);    private final StringSetting encryptKey = new StringSetting("EncryptKey", "rusherhack")
-            .onChange(this::updateCryptoKeys);
+            .onChange(s -> updateCryptoKeys());
     private final StringSetting chatRegex = new StringSetting("ChatRegex", "(Group 1 = name, 2 = msg)",
             "^<([a-zA-Z0-9_]+)>\\s*>*\\s*(.+)$");
     private final StringSetting msgRegex = new StringSetting("MessageRegex", "(Group 1 = name, 2 = msg)",
             "^([a-zA-Z0-9_]+) whispers: (.+)$");
     private final StringSetting outboundDirectMsgRegex = new StringSetting("OutboundDirectMsgRegex", "(Group 1 = target, 2 = msg)",
             "^to ([a-zA-Z0-9_]+): (.+)$");    private final StringSetting decryptKeys = new StringSetting("DecryptKeys", "(comma separated)", "rusherhack")
-            .onChange(this::updateCryptoKeys);
-    private final NumberSetting<Integer> maxChatLength = new NumberSetting<>("MaxChatLength", 50, 0, 255);
+            .onChange(s -> updateCryptoKeys());
+    private final NumberSetting<Integer> maxChatLength = new NumberSetting<>("sMaxChatLength", 50, 0, 255);
     private final NumberSetting<Integer> sendDelaySeconds = new NumberSetting<>("SendDelay", "in seconds", 5, 0, 255);
     private final BooleanSetting ignoreSelf = new BooleanSetting("IgnoreSelf", false);
     private final BooleanSetting debug = new BooleanSetting("Debug", false).setHidden(true);
