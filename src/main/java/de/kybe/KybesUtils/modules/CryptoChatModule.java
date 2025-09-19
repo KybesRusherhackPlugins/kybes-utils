@@ -33,7 +33,7 @@ public class CryptoChatModule extends ToggleableModule {
     private final StringSetting outboundDirectMsgRegex = new StringSetting("OutboundDirectMsgRegex", "(Group 1 = target, 2 = msg)",
             "^to ([a-zA-Z0-9_]+): (.+)$");    private final StringSetting decryptKeys = new StringSetting("DecryptKeys", "(comma separated)", "rusherhack")
             .onChange(s -> updateCryptoKeys());
-    private final NumberSetting<Integer> maxChatLength = new NumberSetting<>("sMaxChatLength", 50, 0, 255);
+    private final NumberSetting<Integer> maxChatLength = new NumberSetting<>("MaxChatLength", 50, 0, 255);
     private final NumberSetting<Integer> sendDelaySeconds = new NumberSetting<>("SendDelay", "in seconds", 5, 0, 255);
     private final BooleanSetting ignoreSelf = new BooleanSetting("IgnoreSelf", false);
     private final BooleanSetting debug = new BooleanSetting("Debug", false).setHidden(true);
