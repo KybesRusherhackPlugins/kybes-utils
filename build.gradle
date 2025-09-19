@@ -30,7 +30,7 @@ repositories {
 		//releases repository will have the latest api version for last stable rusherhack release
 		//snapshots will always be the latest api version
 		url = "https://maven.rusherhack.org/releases"
-		//surl = "https://maven.rusherhack.org/snapshots"
+		//url = "https://maven.rusherhack.org/snapshots"
 	}
 
 	maven {
